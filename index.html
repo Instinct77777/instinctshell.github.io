@@ -42,7 +42,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.75);
             z-index: -1;
         }
 
@@ -629,7 +629,9 @@
         }
 
         @media screen and (max-width: 768px) {
-            .desktop-link {
+            .desktop-link,
+            .nav-links li.desktop-link,
+            .nav-links li.desktop-link a {
                 display: none !important;
             }
 
@@ -671,6 +673,10 @@
                 display: flex !important;
                 align-items: center !important;
                 margin: 0 !important;
+            }
+
+            .nav-links li.desktop-link {
+                display: none !important;
             }
 
             .nav-dropdown {
@@ -928,21 +934,11 @@
                 <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li class="desktop-link"><a href="#features">🎯 Features</a></li>
-                <li class="desktop-link"><a href="#protocols">🔐 Protocols</a></li>
                 <li class="desktop-link"><a href="#tutorial">📚 Tutorial</a></li>
                 <li class="desktop-link"><a href="#privacy">🔒 Privacy Policy</a></li>
                 <li class="nav-dropdown mobile-only">
                     <span class="nav-dropdown-toggle">More</span>
                     <div class="nav-dropdown-menu">
-                        <a href="#features" class="nav-dropdown-item">
-                            <span class="nav-dropdown-icon">🎯</span>
-                            <span>Features</span>
-                        </a>
-                        <a href="#protocols" class="nav-dropdown-item">
-                            <span class="nav-dropdown-icon">🔐</span>
-                            <span>Protocols</span>
-                        </a>
                         <a href="#tutorial" class="nav-dropdown-item">
                             <span class="nav-dropdown-icon">📚</span>
                             <span>Tutorial</span>
@@ -1013,102 +1009,102 @@
                     <p><strong>Support:</strong> <a href="https://t.me/instinct_kotlin" target="_blank" rel="noopener noreferrer" style="color: var(--secondary-color); text-decoration: none;">✈️ Telegram</a></p>
                 </div>
             </div>
-        </section>
-
-        <!-- Features Section -->
-        <section id="features" class="section">
-            <h2>🎯 Key Features</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <h3>🔒 VPN Connection Management</h3>
-                    <ul>
-                        <li>Create secure VPN tunnels</li>
-                        <li>Support for multiple protocols</li>
-                        <li>Connection status monitoring</li>
-                        <li>Automatic reconnection</li>
-                        <li>Split Tunneling</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>📡 Subscription Management</h3>
-                    <ul>
-                        <li>Import servers via URL</li>
-                        <li>Manual server configuration</li>
-                        <li>Organize servers into folders</li>
-                        <li>Automatic updates</li>
-                        <li>Server testing</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>🛡️ Security</h3>
-                    <ul>
-                        <li>Full traffic encryption</li>
-                        <li>DNS leak protection</li>
-                        <li>IPv6 testing</li>
-                        <li>Security monitoring</li>
-                        <li>Firewall and filtering</li>
-                    </ul>
+            
+            <!-- Features Section -->
+            <div style="margin-top: 2rem;">
+                <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-light);">🎯 Key Features</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🔒 VPN Connection Management</h3>
+                        <ul>
+                            <li>Create secure VPN tunnels</li>
+                            <li>Support for multiple protocols</li>
+                            <li>Connection status monitoring</li>
+                            <li>Automatic reconnection</li>
+                            <li>Split Tunneling</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>📡 Subscription Management</h3>
+                        <ul>
+                            <li>Import servers via URL</li>
+                            <li>Manual server configuration</li>
+                            <li>Organize servers into folders</li>
+                            <li>Automatic updates</li>
+                            <li>Server testing</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>🛡️ Security</h3>
+                        <ul>
+                            <li>Full traffic encryption</li>
+                            <li>DNS leak protection</li>
+                            <li>IPv6 testing</li>
+                            <li>Security monitoring</li>
+                            <li>Firewall and filtering</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Protocols Section -->
-        <section id="protocols" class="section">
-            <h2>🔐 Supported Protocols</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Protocol</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>VLESS</strong></td>
-                        <td>Modern efficient protocol</td>
-                    </tr>
-                    <tr>
-                        <td><strong>VMess</strong></td>
-                        <td>Original InstinctShell protocol</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Trojan</strong></td>
-                        <td>TLS-based protocol</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Shadowsocks</strong></td>
-                        <td>Lightweight protocol</td>
-                    </tr>
-                    <tr>
-                        <td><strong>SSH</strong></td>
-                        <td>Secure shell tunneling</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Hysteria</strong></td>
-                        <td>High-performance UDP protocol</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Hysteria2</strong></td>
-                        <td>Updated version of Hysteria</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Ping Tunnel</strong></td>
-                        <td>ICMP-based tunneling</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Reality</strong></td>
-                        <td>VLESS Reality protocol</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Transport Protocols</strong></td>
-                        <td>TCP, UDP, WebSocket, HTTP/2, gRPC, KCP, QUIC</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Security</strong></td>
-                        <td>TLS, XTLS, Reality</td>
-                    </tr>
-                </tbody>
-            </table>
+            
+            <!-- Protocols Section -->
+            <div style="margin-top: 2rem;">
+                <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-light);">🔐 Supported Protocols</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Protocol</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>VLESS</strong></td>
+                            <td>Modern efficient protocol</td>
+                        </tr>
+                        <tr>
+                            <td><strong>VMess</strong></td>
+                            <td>Original InstinctShell protocol</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trojan</strong></td>
+                            <td>TLS-based protocol</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Shadowsocks</strong></td>
+                            <td>Lightweight protocol</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SSH</strong></td>
+                            <td>Secure shell tunneling</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hysteria</strong></td>
+                            <td>High-performance UDP protocol</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hysteria2</strong></td>
+                            <td>Updated version of Hysteria</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ping Tunnel</strong></td>
+                            <td>ICMP-based tunneling</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reality</strong></td>
+                            <td>VLESS Reality protocol</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Transport Protocols</strong></td>
+                            <td>TCP, UDP, WebSocket, HTTP/2, gRPC, KCP, QUIC</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Security</strong></td>
+                            <td>TLS, XTLS, Reality</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <!-- Architecture Section -->
@@ -1936,13 +1932,11 @@
 
             // Update navigation links (desktop)
             const navLinks = document.querySelectorAll('.nav-links > li > a:not(.nav-dropdown-item)');
-            if (navLinks.length >= 6) {
+            if (navLinks.length >= 4) {
                 navLinks[0].textContent = t.nav.home;
                 navLinks[1].textContent = t.nav.about;
-                navLinks[2].innerHTML = `🎯 ${t.nav.features}`;
-                navLinks[3].innerHTML = `🔐 ${t.nav.protocols}`;
-                navLinks[4].innerHTML = `📚 ${t.nav.tutorial}`;
-                navLinks[5].innerHTML = `🔒 ${t.nav.privacy}`;
+                navLinks[2].innerHTML = `📚 ${t.nav.tutorial}`;
+                navLinks[3].innerHTML = `🔒 ${t.nav.privacy}`;
             }
             
             // Update dropdown toggles (mobile)
@@ -1954,11 +1948,9 @@
             
             // Update dropdown items in "More" menu (mobile)
             const moreMenuItems = document.querySelectorAll('.nav-dropdown.mobile-only .nav-dropdown-item');
-            if (moreMenuItems.length >= 4) {
-                moreMenuItems[0].innerHTML = `<span class="nav-dropdown-icon">🎯</span><span>${t.nav.features}</span>`;
-                moreMenuItems[1].innerHTML = `<span class="nav-dropdown-icon">🔐</span><span>${t.nav.protocols}</span>`;
-                moreMenuItems[2].innerHTML = `<span class="nav-dropdown-icon">📚</span><span>${t.nav.tutorial}</span>`;
-                moreMenuItems[3].innerHTML = `<span class="nav-dropdown-icon">🔒</span><span>${t.nav.privacy}</span>`;
+            if (moreMenuItems.length >= 2) {
+                moreMenuItems[0].innerHTML = `<span class="nav-dropdown-icon">📚</span><span>${t.nav.tutorial}</span>`;
+                moreMenuItems[1].innerHTML = `<span class="nav-dropdown-icon">🔒</span><span>${t.nav.privacy}</span>`;
             }
 
             // Update Privacy Policy section
@@ -2009,56 +2001,64 @@
                 `;
             }
 
-            // Update features section
-            const featuresH2 = document.querySelector('#features h2');
-            if (featuresH2) featuresH2.textContent = t.features.title;
-            const featureCards = document.querySelectorAll('#features .card');
-            if (featureCards.length >= 3) {
-                featureCards[0].querySelector('h3').textContent = t.features.vpn.title;
-                featureCards[1].querySelector('h3').textContent = t.features.subscriptions.title;
-                featureCards[2].querySelector('h3').textContent = t.features.security.title;
-                
-                const vpnItems = featureCards[0].querySelectorAll('li');
-                const subItems = featureCards[1].querySelectorAll('li');
-                const secItems = featureCards[2].querySelectorAll('li');
-                
-                t.features.vpn.items.forEach((item, i) => {
-                    if (vpnItems[i]) vpnItems[i].textContent = item;
-                });
-                t.features.subscriptions.items.forEach((item, i) => {
-                    if (subItems[i]) subItems[i].textContent = item;
-                });
-                t.features.security.items.forEach((item, i) => {
-                    if (secItems[i]) secItems[i].textContent = item;
-                });
-            }
-
-            // Update protocols section
-            const protocolsH2 = document.querySelector('#protocols h2');
-            if (protocolsH2) protocolsH2.textContent = t.protocols.title;
-            const protocolTable = document.querySelector('#protocols table');
-            if (protocolTable) {
-                const ths = protocolTable.querySelectorAll('th');
-                if (ths.length >= 2) {
-                    ths[0].textContent = t.protocols.table.protocol;
-                    ths[1].textContent = t.protocols.table.description;
+            // Update features and protocols sections (now inside About)
+            const aboutSection = document.querySelector('#about');
+            if (aboutSection) {
+                // Update features section
+                const featuresH2 = aboutSection.querySelector('h2:last-of-type');
+                if (featuresH2 && featuresH2.textContent.includes('🎯')) {
+                    featuresH2.textContent = t.features.title;
+                }
+                const featureCards = aboutSection.querySelectorAll('.cards-grid .card');
+                if (featureCards.length >= 3) {
+                    featureCards[0].querySelector('h3').textContent = t.features.vpn.title;
+                    featureCards[1].querySelector('h3').textContent = t.features.subscriptions.title;
+                    featureCards[2].querySelector('h3').textContent = t.features.security.title;
+                    
+                    const vpnItems = featureCards[0].querySelectorAll('li');
+                    const subItems = featureCards[1].querySelectorAll('li');
+                    const secItems = featureCards[2].querySelectorAll('li');
+                    
+                    t.features.vpn.items.forEach((item, i) => {
+                        if (vpnItems[i]) vpnItems[i].textContent = item;
+                    });
+                    t.features.subscriptions.items.forEach((item, i) => {
+                        if (subItems[i]) subItems[i].textContent = item;
+                    });
+                    t.features.security.items.forEach((item, i) => {
+                        if (secItems[i]) secItems[i].textContent = item;
+                    });
                 }
                 
-                const protocolRows = protocolTable.querySelectorAll('tbody tr');
-                if (protocolRows.length >= 11) {
-                    protocolRows[0].querySelectorAll('td')[1].textContent = t.protocols.vless;
-                    protocolRows[1].querySelectorAll('td')[1].textContent = t.protocols.vmess;
-                    protocolRows[2].querySelectorAll('td')[1].textContent = t.protocols.trojan;
-                    protocolRows[3].querySelectorAll('td')[1].textContent = t.protocols.shadowsocks;
-                    protocolRows[4].querySelectorAll('td')[1].textContent = t.protocols.ssh;
-                    protocolRows[5].querySelectorAll('td')[1].textContent = t.protocols.hysteria;
-                    protocolRows[6].querySelectorAll('td')[1].textContent = t.protocols.hysteria2;
-                    protocolRows[7].querySelectorAll('td')[1].textContent = t.protocols.pingTunnel;
-                    protocolRows[8].querySelectorAll('td')[1].textContent = t.protocols.reality;
-                    protocolRows[9].querySelectorAll('td')[0].innerHTML = `<strong>${t.protocols.transport}</strong>`;
-                    protocolRows[9].querySelectorAll('td')[1].textContent = t.protocols.transportList;
-                    protocolRows[10].querySelectorAll('td')[0].innerHTML = `<strong>${t.protocols.security}</strong>`;
-                    protocolRows[10].querySelectorAll('td')[1].textContent = t.protocols.securityList;
+                // Update protocols section
+                const protocolsH2 = Array.from(aboutSection.querySelectorAll('h2')).find(h2 => h2.textContent.includes('🔐'));
+                if (protocolsH2) {
+                    protocolsH2.textContent = t.protocols.title;
+                }
+                const protocolTable = aboutSection.querySelector('table');
+                if (protocolTable) {
+                    const ths = protocolTable.querySelectorAll('th');
+                    if (ths.length >= 2) {
+                        ths[0].textContent = t.protocols.table.protocol;
+                        ths[1].textContent = t.protocols.table.description;
+                    }
+                    
+                    const protocolRows = protocolTable.querySelectorAll('tbody tr');
+                    if (protocolRows.length >= 11) {
+                        protocolRows[0].querySelectorAll('td')[1].textContent = t.protocols.vless;
+                        protocolRows[1].querySelectorAll('td')[1].textContent = t.protocols.vmess;
+                        protocolRows[2].querySelectorAll('td')[1].textContent = t.protocols.trojan;
+                        protocolRows[3].querySelectorAll('td')[1].textContent = t.protocols.shadowsocks;
+                        protocolRows[4].querySelectorAll('td')[1].textContent = t.protocols.ssh;
+                        protocolRows[5].querySelectorAll('td')[1].textContent = t.protocols.hysteria;
+                        protocolRows[6].querySelectorAll('td')[1].textContent = t.protocols.hysteria2;
+                        protocolRows[7].querySelectorAll('td')[1].textContent = t.protocols.pingTunnel;
+                        protocolRows[8].querySelectorAll('td')[1].textContent = t.protocols.reality;
+                        protocolRows[9].querySelectorAll('td')[0].innerHTML = `<strong>${t.protocols.transport}</strong>`;
+                        protocolRows[9].querySelectorAll('td')[1].textContent = t.protocols.transportList;
+                        protocolRows[10].querySelectorAll('td')[0].innerHTML = `<strong>${t.protocols.security}</strong>`;
+                        protocolRows[10].querySelectorAll('td')[1].textContent = t.protocols.securityList;
+                    }
                 }
             }
 
