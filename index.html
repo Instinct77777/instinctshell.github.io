@@ -1,74 +1,866 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Privacy Policy - Offroad Tiltmeter</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-    header {
-      background: #2c3e50;
-      color: #fff;
-      padding: 20px 0;
-      text-align: center;
-    }
-    main {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    h1, h2 {
-      color: #2c3e50;
-    }
-    footer {
-      text-align: center;
-      padding: 10px;
-      background: #2c3e50;
-      color: #fff;
-      margin-top: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstinctShell - VPN Subscription Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6200EE;
+            --primary-dark: #3700B3;
+            --secondary-color: #03DAC6;
+            --accent: #FF6B6B;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-light: rgba(255, 255, 255, 0.95);
+            --text-secondary: rgba(255, 255, 255, 0.8);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            /* Для GitHub Pages используйте относительный путь:
+               - Если изображение в папке images/: url('images/1763303456.png')
+               - Если изображение в корне репозитория: url('./1763303456.png')
+            */
+            background: url('./1763303456.png') center center / cover no-repeat fixed;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-light);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-light);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            color: var(--text-light);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #fff 0%, #03DAC6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            animation: fadeInUp 1s;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero .version {
+            display: inline-block;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            margin-top: 1rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #fff 0%, #03DAC6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Glass Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Glass Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        th {
+            background: rgba(98, 0, 238, 0.3);
+            backdrop-filter: blur(10px);
+            color: var(--text-light);
+            font-weight: bold;
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Features List */
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+        }
+
+        /* Privacy Policy Section */
+        .privacy-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .privacy-section h3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .privacy-section p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .privacy-section ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .privacy-section strong {
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-top: 1px solid var(--glass-border);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            display: none;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .scroll-top.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-top:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                background-attachment: scroll;
+            }
+        }
+
+        /* Language flags */
+        .language-flag {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Stats cards */
+        .card p[style*="font-size: 2rem"] {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Privacy Policy</h1>
-    <h2>Offroad Tiltmeter</h2>
-  </header>
-  <main>
-    <p>Effective date: <strong>September 5, 2025</strong></p>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">🛡️ InstinctShell</div>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#features">Возможности</a></li>
+                <li><a href="#protocols">Протоколы</a></li>
+                <li><a href="#architecture">Архитектура</a></li>
+                <li><a href="#privacy">Privacy Policy</a></li>
+            </ul>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+        </div>
+    </nav>
 
-    <h2>Introduction</h2>
-    <p>Your privacy is important to us. This Privacy Policy explains how Offroad Tiltmeter collects, uses, and protects your information.</p>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <h1>InstinctShell</h1>
+            <p>VPN Subscription Management Application</p>
+            <div class="version">Версия 1.9.7 | Android 7.0+ | API 24-35</div>
+        </section>
 
-    <h2>Information Collection and Use</h2>
-    <p>Offroad Tiltmeter does not collect personally identifiable information. Some non-personal data (such as crash logs or usage statistics) may be collected automatically to improve app performance.</p>
+        <!-- About Section -->
+        <section id="about" class="section">
+            <h2>📋 О проекте</h2>
+            <div class="card">
+                <p><strong>InstinctShell</strong> — это современное Android-приложение для управления VPN-подписками с поддержкой множества протоколов и расширенными функциями безопасности.</p>
+                <br>
+                <p><strong>Версия:</strong> 1.9.7</p>
+                <p><strong>Минимальная версия Android:</strong> 7.0 (API 24)</p>
+                <p><strong>Целевая версия:</strong> Android 15 (API 35)</p>
+            </div>
+        </section>
 
-    <h2>Third-Party Services</h2>
-    <p>Offroad Tiltmeter may use third-party services (such as Google Play Services or Firebase) that collect information according to their own privacy policies.</p>
+        <!-- Features Section -->
+        <section id="features" class="section">
+            <h2>🎯 Основные возможности</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🔒 Управление VPN-подключениями</h3>
+                    <ul>
+                        <li>Создание защищенных VPN-туннелей</li>
+                        <li>Поддержка множества протоколов</li>
+                        <li>Мониторинг статуса подключения</li>
+                        <li>Автоматическое переподключение</li>
+                        <li>Split Tunneling</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>📡 Управление подписками</h3>
+                    <ul>
+                        <li>Импорт серверов через URL</li>
+                        <li>Ручная настройка серверов</li>
+                        <li>Организация серверов по папкам</li>
+                        <li>Автоматическое обновление</li>
+                        <li>Тестирование серверов</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🛡️ Безопасность</h3>
+                    <ul>
+                        <li>Полное шифрование трафика</li>
+                        <li>Защита от DNS-утечек</li>
+                        <li>Тестирование IPv6</li>
+                        <li>Мониторинг безопасности</li>
+                        <li>Firewall и фильтрация</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-    <h2>Data Security</h2>
-    <p>We value your trust and strive to protect your information. However, please remember that no method of electronic storage is 100% secure.</p>
+        <!-- Protocols Section -->
+        <section id="protocols" class="section">
+            <h2>🔐 Поддерживаемые протоколы</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Протокол</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>VLESS</strong></td>
+                        <td>Современный эффективный протокол</td>
+                    </tr>
+                    <tr>
+                        <td><strong>VMess</strong></td>
+                        <td>Оригинальный протокол InstinctShell</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Trojan</strong></td>
+                        <td>TLS-based протокол</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shadowsocks</strong></td>
+                        <td>Легковесный протокол</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SSH</strong></td>
+                        <td>Secure shell туннелирование</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hysteria</strong></td>
+                        <td>Высокопроизводительный UDP-протокол</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hysteria2</strong></td>
+                        <td>Обновленная версия Hysteria</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ping Tunnel</strong></td>
+                        <td>ICMP-based туннелирование</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reality</strong></td>
+                        <td>VLESS Reality протокол</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="card" style="margin-top: 2rem;">
+                <h3>Транспортные протоколы</h3>
+                <p>TCP, UDP, WebSocket, HTTP/2, gRPC, KCP, QUIC</p>
+                <h3 style="margin-top: 1.5rem;">Безопасность</h3>
+                <p>TLS, XTLS, Reality</p>
+            </div>
+        </section>
 
-    <h2>Changes to This Policy</h2>
-    <p>We may update this Privacy Policy from time to time. Please review this page periodically for any changes.</p>
+        <!-- Architecture Section -->
+        <section id="architecture" class="section">
+            <h2>🏗️ Архитектура приложения</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>🎨 Frontend</h3>
+                    <ul>
+                        <li>Jetpack Compose</li>
+                        <li>Navigation Compose</li>
+                        <li>Material Design 3</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>⚙️ Backend</h3>
+                    <ul>
+                        <li>Room Database</li>
+                        <li>Retrofit/OkHttp</li>
+                        <li>Hilt (DI)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🔒 VPN Core</h3>
+                    <ul>
+                        <li>Xray-core</li>
+                        <li>Native библиотеки</li>
+                        <li>libXray.aar</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>📐 Архитектура</h3>
+                    <ul>
+                        <li>MVVM Pattern</li>
+                        <li>StateFlow</li>
+                        <li>Реактивное состояние</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-    <h2>Contact Us</h2>
-    <p>If you have questions or concerns about this Privacy Policy, you can contact the app developer:</p>
-    <p><strong>Name:</strong> Aleksandr Konstantinov</p>
-    <p><strong>Email:</strong> instinctkotlincompose@gmail.com</p>
-  </main>
-  <footer>
-    &copy; 2025 Offroad Tiltmeter — Aleksandr Konstantinov. All rights reserved.
-  </footer>
+        <!-- Screens Section -->
+        <section id="screens" class="section">
+            <h2>📱 Структура экранов</h2>
+            <div class="features-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🏠</span>
+                    <div>
+                        <strong>Home Screen</strong><br>
+                        Статус подключения, быстрые действия
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🌐</span>
+                    <div>
+                        <strong>Server List</strong><br>
+                        Список серверов, поиск, фильтрация
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📋</span>
+                    <div>
+                        <strong>Server Details</strong><br>
+                        Детали сервера, редактирование
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚙️</span>
+                    <div>
+                        <strong>Settings</strong><br>
+                        Настройки приложения и VPN
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">👤</span>
+                    <div>
+                        <strong>Profile</strong><br>
+                        Профили безопасности
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📚</span>
+                    <div>
+                        <strong>Tutorial</strong><br>
+                        Руководство по использованию
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Localization Section -->
+        <section id="localization" class="section">
+            <h2>🌍 Локализация</h2>
+            <div class="card">
+                <h3>Поддерживаемые языки (12)</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div>🇷🇺 Русский</div>
+                    <div>🇬🇧 Английский</div>
+                    <div>🇧🇾 Белорусский</div>
+                    <div>🇺🇦 Украинский</div>
+                    <div>🇨🇿 Чеченский</div>
+                    <div>🇪🇸 Испанский</div>
+                    <div>🇸🇦 Арабский (RTL)</div>
+                    <div>🇩🇪 Немецкий</div>
+                    <div>🇨🇳 Китайский</div>
+                    <div>🇮🇱 Иврит (RTL)</div>
+                    <div>🇹🇯 Таджикский</div>
+                    <div>🇰🇿 Казахский</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy Policy Section -->
+        <section id="privacy" class="section">
+            <h2>🔒 Privacy Policy</h2>
+            <div class="privacy-section">
+                <h3>Политика конфиденциальности InstinctShell</h3>
+                
+                <p><strong>Последнее обновление:</strong> [Дата]</p>
+                
+                <p>InstinctShell ("мы", "наш", "приложение") уважает вашу конфиденциальность и стремится защитить ваши личные данные. Эта Политика конфиденциальности объясняет, как мы собираем, используем, раскрываем и защищаем вашу информацию при использовании нашего VPN-приложения.</p>
+                
+                <h3>1. Собираемая информация</h3>
+                <p>InstinctShell собирает минимально необходимую информацию для обеспечения работы VPN-сервиса:</p>
+                <ul>
+                    <li><strong>Технические данные:</strong> Информация об устройстве, версия Android, модель устройства</li>
+                    <li><strong>Данные подключения:</strong> Статус VPN-подключения, выбранный сервер, время подключения</li>
+                    <li><strong>Данные подписок:</strong> URL подписок, которые вы добавляете вручную (хранятся локально)</li>
+                    <li><strong>Настройки приложения:</strong> Ваши предпочтения (язык, тема, настройки VPN)</li>
+                </ul>
+                
+                <h3>2. Что мы НЕ собираем</h3>
+                <p>InstinctShell НЕ собирает и НЕ передает:</p>
+                <ul>
+                    <li>Ваш интернет-трафик или содержимое ваших запросов</li>
+                    <li>Историю просмотров или посещенные веб-сайты</li>
+                    <li>Персональные данные (имя, email, телефон)</li>
+                    <li>Локацию или GPS-координаты</li>
+                    <li>Контакты или сообщения</li>
+                    <li>Данные других приложений</li>
+                </ul>
+                
+                <h3>3. Использование информации</h3>
+                <p>Собранная информация используется исключительно для:</p>
+                <ul>
+                    <li>Обеспечения работы VPN-подключения</li>
+                    <li>Улучшения функциональности приложения</li>
+                    <li>Исправления ошибок и оптимизации производительности</li>
+                    <li>Предоставления поддержки пользователям</li>
+                </ul>
+                
+                <h3>4. Хранение данных</h3>
+                <p>Все данные хранятся локально на вашем устройстве:</p>
+                <ul>
+                    <li>Конфигурации серверов хранятся в локальной базе данных Room</li>
+                    <li>Настройки приложения хранятся в локальном хранилище (MMKV)</li>
+                    <li>Мы НЕ отправляем данные на внешние серверы</li>
+                    <li>Мы НЕ используем аналитику или трекинг</li>
+                </ul>
+                
+                <h3>5. VPN-серверы</h3>
+                <p>Важно понимать:</p>
+                <ul>
+                    <li>InstinctShell - это клиентское приложение для управления VPN-подключениями</li>
+                    <li>Мы НЕ предоставляем VPN-серверы - вы используете свои собственные серверы или серверы вашего провайдера</li>
+                    <li>Трафик проходит через выбранные вами VPN-серверы согласно их политике конфиденциальности</li>
+                    <li>Мы не имеем доступа к трафику, проходящему через VPN-серверы</li>
+                </ul>
+                
+                <h3>6. Разрешения приложения</h3>
+                <p>InstinctShell запрашивает следующие разрешения:</p>
+                <ul>
+                    <li><strong>VPN:</strong> Необходимо для создания VPN-туннеля (основная функция приложения)</li>
+                    <li><strong>Интернет:</strong> Для подключения к VPN-серверам и обновления подписок</li>
+                    <li><strong>Уведомления:</strong> Для отображения статуса VPN-подключения</li>
+                    <li><strong>Запуск при загрузке:</strong> Для автоматического переподключения (опционально)</li>
+                </ul>
+                
+                <h3>7. Третьи стороны</h3>
+                <p>InstinctShell использует следующие open-source библиотеки:</p>
+                <ul>
+                    <li>Xray-core (Mozilla Public License 2.0)</li>
+                    <li>Android Jetpack библиотеки (Apache 2.0)</li>
+                    <li>Retrofit/OkHttp (Apache 2.0)</li>
+                    <li>Room Database (Apache 2.0)</li>
+                </ul>
+                <p>Эти библиотеки не собирают личные данные.</p>
+                
+                <h3>8. Безопасность</h3>
+                <p>Мы принимаем меры для защиты ваших данных:</p>
+                <ul>
+                    <li>Все данные хранятся локально на устройстве</li>
+                    <li>Использование шифрования для хранения конфигураций</li>
+                    <li>Минимизация собираемых данных</li>
+                    <li>Отсутствие отправки данных на внешние серверы</li>
+                </ul>
+                
+                <h3>9. Ваши права</h3>
+                <p>Вы имеете право:</p>
+                <ul>
+                    <li>Удалить все данные приложения, удалив приложение</li>
+                    <li>Экспортировать ваши конфигурации</li>
+                    <li>Не использовать определенные функции</li>
+                    <li>Отключить автоматическое обновление подписок</li>
+                </ul>
+                
+                <h3>10. Изменения в политике</h3>
+                <p>Мы можем обновлять эту Политику конфиденциальности время от времени. Все изменения будут отражены в этой странице с указанием даты последнего обновления.</p>
+                
+                <h3>11. Контакты</h3>
+                <p>Если у вас есть вопросы о этой Политике конфиденциальности, пожалуйста, свяжитесь с нами:</p>
+                <p><strong>Email:</strong> [Ваш email]</p>
+                <p><strong>Разработчик:</strong> InstinctShell Team</p>
+                
+                <h3>12. Согласие</h3>
+                <p>Используя InstinctShell, вы соглашаетесь с этой Политикой конфиденциальности. Если вы не согласны с этой политикой, пожалуйста, не используйте наше приложение.</p>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section id="stats" class="section">
+            <h2>📈 Статистика проекта</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>💻 Код</h3>
+                    <p style="font-size: 2rem; font-weight: bold; color: var(--secondary-color);">50,000+</p>
+                    <p>строк кода</p>
+                </div>
+                <div class="card">
+                    <h3>📱 Язык</h3>
+                    <p style="font-size: 2rem; font-weight: bold; color: var(--secondary-color);">Kotlin</p>
+                    <p>основной язык</p>
+                </div>
+                <div class="card">
+                    <h3>🎨 UI</h3>
+                    <p style="font-size: 2rem; font-weight: bold; color: var(--secondary-color);">Compose</p>
+                    <p>Jetpack Compose</p>
+                </div>
+                <div class="card">
+                    <h3>🌍 Языки</h3>
+                    <p style="font-size: 2rem; font-weight: bold; color: var(--secondary-color);">12</p>
+                    <p>поддерживаемых языков</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 InstinctShell Team. Все права защищены.</p>
+        <p style="margin-top: 1rem; opacity: 0.7;">Версия 1.9.7 | Android 7.0+ | API 24-35</p>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <button class="scroll-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Theme toggle (kept for future use)
+        function toggleTheme() {
+            // Theme toggle functionality can be added here if needed
+            alert('Тема будет реализована в будущем');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll to top button
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.querySelector('.scroll-top');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('show');
+            } else {
+                scrollTop.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Fade in animations on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .section').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
+
