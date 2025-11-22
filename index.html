@@ -96,7 +96,12 @@
             backdrop-filter: blur(10px);
         }
 
-        .theme-toggle {
+        /* Language Selector */
+        .language-selector {
+            position: relative;
+        }
+
+        .language-button {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             color: var(--text-light);
@@ -104,13 +109,55 @@
             padding: 0.5rem 1rem;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1rem;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .theme-toggle:hover {
+        .language-button:hover {
             background: rgba(255, 255, 255, 0.15);
             transform: scale(1.05);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            min-width: 150px;
+            display: none;
+            overflow: hidden;
+            z-index: 1001;
+        }
+
+        .language-dropdown.show {
+            display: block;
+        }
+
+        .language-option {
+            padding: 0.75rem 1rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .language-option.active {
+            background: rgba(98, 0, 238, 0.3);
         }
 
         /* Main Content */
@@ -432,7 +479,26 @@
                 <li><a href="#architecture">Архитектура</a></li>
                 <li><a href="#privacy">Privacy Policy</a></li>
             </ul>
-            <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+            <div class="language-selector">
+                <button class="language-button" onclick="toggleLanguageMenu()">
+                    <span id="current-lang-flag">🇷🇺</span>
+                    <span id="current-lang-code">RU</span>
+                </button>
+                <div class="language-dropdown" id="languageDropdown">
+                    <div class="language-option active" onclick="changeLanguage('ru')">
+                        <span>🇷🇺</span>
+                        <span>Русский</span>
+                    </div>
+                    <div class="language-option" onclick="changeLanguage('en')">
+                        <span>🇬🇧</span>
+                        <span>English</span>
+                    </div>
+                    <div class="language-option" onclick="changeLanguage('zh')">
+                        <span>🇨🇳</span>
+                        <span>中文</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -806,10 +872,589 @@
     <button class="scroll-top" onclick="scrollToTop()">↑</button>
 
     <script>
-        // Theme toggle (kept for future use)
-        function toggleTheme() {
-            // Theme toggle functionality can be added here if needed
-            alert('Тема будет реализована в будущем');
+        // Language translations
+        const translations = {
+            ru: {
+                nav: {
+                    home: 'Главная',
+                    features: 'Возможности',
+                    protocols: 'Протоколы',
+                    architecture: 'Архитектура',
+                    privacy: 'Privacy Policy'
+                },
+                hero: {
+                    title: 'InstinctShell',
+                    subtitle: 'VPN Subscription Management Application',
+                    version: 'Версия 1.9.7 | Android 7.0+ | API 24-35'
+                },
+                about: {
+                    title: '📋 О проекте',
+                    description: '**InstinctShell** — это современное Android-приложение для управления VPN-подписками с поддержкой множества протоколов и расширенными функциями безопасности.',
+                    version: 'Версия:',
+                    minAndroid: 'Минимальная версия Android:',
+                    targetAndroid: 'Целевая версия:'
+                },
+                features: {
+                    title: '🎯 Основные возможности',
+                    vpn: {
+                        title: '🔒 Управление VPN-подключениями',
+                        items: [
+                            'Создание защищенных VPN-туннелей',
+                            'Поддержка множества протоколов',
+                            'Мониторинг статуса подключения',
+                            'Автоматическое переподключение',
+                            'Split Tunneling'
+                        ]
+                    },
+                    subscriptions: {
+                        title: '📡 Управление подписками',
+                        items: [
+                            'Импорт серверов через URL',
+                            'Ручная настройка серверов',
+                            'Организация серверов по папкам',
+                            'Автоматическое обновление',
+                            'Тестирование серверов'
+                        ]
+                    },
+                    security: {
+                        title: '🛡️ Безопасность',
+                        items: [
+                            'Полное шифрование трафика',
+                            'Защита от DNS-утечек',
+                            'Тестирование IPv6',
+                            'Мониторинг безопасности',
+                            'Firewall и фильтрация'
+                        ]
+                    }
+                },
+                protocols: {
+                    title: '🔐 Поддерживаемые протоколы',
+                    table: {
+                        protocol: 'Протокол',
+                        description: 'Описание'
+                    },
+                    vless: 'Современный эффективный протокол',
+                    vmess: 'Оригинальный протокол InstinctShell',
+                    trojan: 'TLS-based протокол',
+                    shadowsocks: 'Легковесный протокол',
+                    ssh: 'Secure shell туннелирование',
+                    hysteria: 'Высокопроизводительный UDP-протокол',
+                    hysteria2: 'Обновленная версия Hysteria',
+                    pingTunnel: 'ICMP-based туннелирование',
+                    reality: 'VLESS Reality протокол',
+                    transport: 'Транспортные протоколы',
+                    transportList: 'TCP, UDP, WebSocket, HTTP/2, gRPC, KCP, QUIC',
+                    security: 'Безопасность',
+                    securityList: 'TLS, XTLS, Reality'
+                },
+                architecture: {
+                    title: '🏗️ Архитектура приложения',
+                    frontend: {
+                        title: '🎨 Frontend',
+                        items: ['Jetpack Compose', 'Navigation Compose', 'Material Design 3']
+                    },
+                    backend: {
+                        title: '⚙️ Backend',
+                        items: ['Room Database', 'Retrofit/OkHttp', 'Hilt (DI)']
+                    },
+                    vpn: {
+                        title: '🔒 VPN Core',
+                        items: ['Xray-core', 'Native библиотеки', 'libXray.aar']
+                    },
+                    pattern: {
+                        title: '📐 Архитектура',
+                        items: ['MVVM Pattern', 'StateFlow', 'Реактивное состояние']
+                    }
+                },
+                screens: {
+                    title: '📱 Структура экранов',
+                    home: { title: 'Home Screen', desc: 'Статус подключения, быстрые действия' },
+                    serverList: { title: 'Server List', desc: 'Список серверов, поиск, фильтрация' },
+                    serverDetails: { title: 'Server Details', desc: 'Детали сервера, редактирование' },
+                    settings: { title: 'Settings', desc: 'Настройки приложения и VPN' },
+                    profile: { title: 'Profile', desc: 'Профили безопасности' },
+                    tutorial: { title: 'Tutorial', desc: 'Руководство по использованию' }
+                },
+                localization: {
+                    title: '🌍 Локализация',
+                    subtitle: 'Поддерживаемые языки (12)'
+                },
+                stats: {
+                    title: '📈 Статистика проекта',
+                    code: { title: '💻 Код', value: '50,000+', desc: 'строк кода' },
+                    language: { title: '📱 Язык', value: 'Kotlin', desc: 'основной язык' },
+                    ui: { title: '🎨 UI', value: 'Compose', desc: 'Jetpack Compose' },
+                    languages: { title: '🌍 Языки', value: '12', desc: 'поддерживаемых языков' }
+                },
+                footer: {
+                    copyright: '© 2024 InstinctShell Team. Все права защищены.',
+                    version: 'Версия 1.9.7 | Android 7.0+ | API 24-35'
+                }
+            },
+            en: {
+                nav: {
+                    home: 'Home',
+                    features: 'Features',
+                    protocols: 'Protocols',
+                    architecture: 'Architecture',
+                    privacy: 'Privacy Policy'
+                },
+                hero: {
+                    title: 'InstinctShell',
+                    subtitle: 'VPN Subscription Management Application',
+                    version: 'Version 1.9.7 | Android 7.0+ | API 24-35'
+                },
+                about: {
+                    title: '📋 About',
+                    description: '**InstinctShell** is a modern Android application for managing VPN subscriptions with support for multiple protocols and advanced security features.',
+                    version: 'Version:',
+                    minAndroid: 'Minimum Android version:',
+                    targetAndroid: 'Target version:'
+                },
+                features: {
+                    title: '🎯 Key Features',
+                    vpn: {
+                        title: '🔒 VPN Connection Management',
+                        items: [
+                            'Create secure VPN tunnels',
+                            'Support for multiple protocols',
+                            'Connection status monitoring',
+                            'Automatic reconnection',
+                            'Split Tunneling'
+                        ]
+                    },
+                    subscriptions: {
+                        title: '📡 Subscription Management',
+                        items: [
+                            'Import servers via URL',
+                            'Manual server configuration',
+                            'Organize servers into folders',
+                            'Automatic updates',
+                            'Server testing'
+                        ]
+                    },
+                    security: {
+                        title: '🛡️ Security',
+                        items: [
+                            'Full traffic encryption',
+                            'DNS leak protection',
+                            'IPv6 testing',
+                            'Security monitoring',
+                            'Firewall and filtering'
+                        ]
+                    }
+                },
+                protocols: {
+                    title: '🔐 Supported Protocols',
+                    table: {
+                        protocol: 'Protocol',
+                        description: 'Description'
+                    },
+                    vless: 'Modern efficient protocol',
+                    vmess: 'Original InstinctShell protocol',
+                    trojan: 'TLS-based protocol',
+                    shadowsocks: 'Lightweight protocol',
+                    ssh: 'Secure shell tunneling',
+                    hysteria: 'High-performance UDP protocol',
+                    hysteria2: 'Updated version of Hysteria',
+                    pingTunnel: 'ICMP-based tunneling',
+                    reality: 'VLESS Reality protocol',
+                    transport: 'Transport Protocols',
+                    transportList: 'TCP, UDP, WebSocket, HTTP/2, gRPC, KCP, QUIC',
+                    security: 'Security',
+                    securityList: 'TLS, XTLS, Reality'
+                },
+                architecture: {
+                    title: '🏗️ Application Architecture',
+                    frontend: {
+                        title: '🎨 Frontend',
+                        items: ['Jetpack Compose', 'Navigation Compose', 'Material Design 3']
+                    },
+                    backend: {
+                        title: '⚙️ Backend',
+                        items: ['Room Database', 'Retrofit/OkHttp', 'Hilt (DI)']
+                    },
+                    vpn: {
+                        title: '🔒 VPN Core',
+                        items: ['Xray-core', 'Native libraries', 'libXray.aar']
+                    },
+                    pattern: {
+                        title: '📐 Architecture',
+                        items: ['MVVM Pattern', 'StateFlow', 'Reactive state']
+                    }
+                },
+                screens: {
+                    title: '📱 Screen Structure',
+                    home: { title: 'Home Screen', desc: 'Connection status, quick actions' },
+                    serverList: { title: 'Server List', desc: 'Server list, search, filtering' },
+                    serverDetails: { title: 'Server Details', desc: 'Server details, editing' },
+                    settings: { title: 'Settings', desc: 'Application and VPN settings' },
+                    profile: { title: 'Profile', desc: 'Security profiles' },
+                    tutorial: { title: 'Tutorial', desc: 'Usage guide' }
+                },
+                localization: {
+                    title: '🌍 Localization',
+                    subtitle: 'Supported Languages (12)'
+                },
+                stats: {
+                    title: '📈 Project Statistics',
+                    code: { title: '💻 Code', value: '50,000+', desc: 'lines of code' },
+                    language: { title: '📱 Language', value: 'Kotlin', desc: 'main language' },
+                    ui: { title: '🎨 UI', value: 'Compose', desc: 'Jetpack Compose' },
+                    languages: { title: '🌍 Languages', value: '12', desc: 'supported languages' }
+                },
+                footer: {
+                    copyright: '© 2024 InstinctShell Team. All rights reserved.',
+                    version: 'Version 1.9.7 | Android 7.0+ | API 24-35'
+                }
+            },
+            zh: {
+                nav: {
+                    home: '首页',
+                    features: '功能',
+                    protocols: '协议',
+                    architecture: '架构',
+                    privacy: '隐私政策'
+                },
+                hero: {
+                    title: 'InstinctShell',
+                    subtitle: 'VPN订阅管理应用程序',
+                    version: '版本 1.9.7 | Android 7.0+ | API 24-35'
+                },
+                about: {
+                    title: '📋 关于项目',
+                    description: '**InstinctShell** 是一个现代化的Android应用程序，用于管理VPN订阅，支持多种协议和高级安全功能。',
+                    version: '版本：',
+                    minAndroid: '最低Android版本：',
+                    targetAndroid: '目标版本：'
+                },
+                features: {
+                    title: '🎯 主要功能',
+                    vpn: {
+                        title: '🔒 VPN连接管理',
+                        items: [
+                            '创建安全的VPN隧道',
+                            '支持多种协议',
+                            '连接状态监控',
+                            '自动重连',
+                            '分流隧道'
+                        ]
+                    },
+                    subscriptions: {
+                        title: '📡 订阅管理',
+                        items: [
+                            '通过URL导入服务器',
+                            '手动服务器配置',
+                            '将服务器组织到文件夹',
+                            '自动更新',
+                            '服务器测试'
+                        ]
+                    },
+                    security: {
+                        title: '🛡️ 安全性',
+                        items: [
+                            '完全流量加密',
+                            'DNS泄漏保护',
+                            'IPv6测试',
+                            '安全监控',
+                            '防火墙和过滤'
+                        ]
+                    }
+                },
+                protocols: {
+                    title: '🔐 支持的协议',
+                    table: {
+                        protocol: '协议',
+                        description: '描述'
+                    },
+                    vless: '现代高效协议',
+                    vmess: '原始InstinctShell协议',
+                    trojan: '基于TLS的协议',
+                    shadowsocks: '轻量级协议',
+                    ssh: '安全外壳隧道',
+                    hysteria: '高性能UDP协议',
+                    hysteria2: 'Hysteria的更新版本',
+                    pingTunnel: '基于ICMP的隧道',
+                    reality: 'VLESS Reality协议',
+                    transport: '传输协议',
+                    transportList: 'TCP, UDP, WebSocket, HTTP/2, gRPC, KCP, QUIC',
+                    security: '安全性',
+                    securityList: 'TLS, XTLS, Reality'
+                },
+                architecture: {
+                    title: '🏗️ 应用程序架构',
+                    frontend: {
+                        title: '🎨 前端',
+                        items: ['Jetpack Compose', 'Navigation Compose', 'Material Design 3']
+                    },
+                    backend: {
+                        title: '⚙️ 后端',
+                        items: ['Room Database', 'Retrofit/OkHttp', 'Hilt (DI)']
+                    },
+                    vpn: {
+                        title: '🔒 VPN核心',
+                        items: ['Xray-core', '原生库', 'libXray.aar']
+                    },
+                    pattern: {
+                        title: '📐 架构',
+                        items: ['MVVM模式', 'StateFlow', '响应式状态']
+                    }
+                },
+                screens: {
+                    title: '📱 屏幕结构',
+                    home: { title: '主页', desc: '连接状态，快速操作' },
+                    serverList: { title: '服务器列表', desc: '服务器列表，搜索，过滤' },
+                    serverDetails: { title: '服务器详情', desc: '服务器详情，编辑' },
+                    settings: { title: '设置', desc: '应用程序和VPN设置' },
+                    profile: { title: '配置文件', desc: '安全配置文件' },
+                    tutorial: { title: '教程', desc: '使用指南' }
+                },
+                localization: {
+                    title: '🌍 本地化',
+                    subtitle: '支持的语言 (12)'
+                },
+                stats: {
+                    title: '📈 项目统计',
+                    code: { title: '💻 代码', value: '50,000+', desc: '行代码' },
+                    language: { title: '📱 语言', value: 'Kotlin', desc: '主要语言' },
+                    ui: { title: '🎨 UI', value: 'Compose', desc: 'Jetpack Compose' },
+                    languages: { title: '🌍 语言', value: '12', desc: '支持的语言' }
+                },
+                footer: {
+                    copyright: '© 2024 InstinctShell Team. 保留所有权利。',
+                    version: '版本 1.9.7 | Android 7.0+ | API 24-35'
+                }
+            }
+        };
+
+        // Current language
+        let currentLanguage = localStorage.getItem('language') || 'ru';
+
+        // Language flags and codes
+        const languageInfo = {
+            ru: { flag: '🇷🇺', code: 'RU', name: 'Русский' },
+            en: { flag: '🇬🇧', code: 'EN', name: 'English' },
+            zh: { flag: '🇨🇳', code: 'ZH', name: '中文' }
+        };
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            changeLanguage(currentLanguage, false);
+        });
+
+        // Toggle language menu
+        function toggleLanguageMenu() {
+            const dropdown = document.getElementById('languageDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Close language menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const selector = document.querySelector('.language-selector');
+            const dropdown = document.getElementById('languageDropdown');
+            if (selector && !selector.contains(event.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Change language
+        function changeLanguage(lang, save = true) {
+            currentLanguage = lang;
+            if (save) {
+                localStorage.setItem('language', lang);
+            }
+
+            const t = translations[lang];
+            const info = languageInfo[lang];
+
+            // Update language button
+            document.getElementById('current-lang-flag').textContent = info.flag;
+            document.getElementById('current-lang-code').textContent = info.code;
+
+            // Update navigation
+            const navLinks = document.querySelectorAll('.nav-links a');
+            if (navLinks.length >= 5) {
+                navLinks[0].textContent = t.nav.home;
+                navLinks[1].textContent = t.nav.features;
+                navLinks[2].textContent = t.nav.protocols;
+                navLinks[3].textContent = t.nav.architecture;
+                navLinks[4].textContent = t.nav.privacy;
+            }
+
+            // Update hero section
+            const heroH1 = document.querySelector('.hero h1');
+            const heroP = document.querySelector('.hero p');
+            const heroVersion = document.querySelector('.hero .version');
+            if (heroH1) heroH1.textContent = t.hero.title;
+            if (heroP) heroP.textContent = t.hero.subtitle;
+            if (heroVersion) heroVersion.textContent = t.hero.version;
+
+            // Update about section
+            const aboutH2 = document.querySelector('#about h2');
+            const aboutCard = document.querySelector('#about .card');
+            if (aboutH2) aboutH2.textContent = t.about.title;
+            if (aboutCard) {
+                aboutCard.innerHTML = `
+                    <p><strong>InstinctShell</strong> ${t.about.description.replace('**InstinctShell** — это', '').replace('**InstinctShell** is', '').replace('**InstinctShell** 是一个', '').replace('**InstinctShell**', '')}</p>
+                    <br>
+                    <p><strong>${t.about.version}</strong> 1.9.7</p>
+                    <p><strong>${t.about.minAndroid}</strong> 7.0 (API 24)</p>
+                    <p><strong>${t.about.targetAndroid}</strong> Android 15 (API 35)</p>
+                `;
+            }
+
+            // Update features section
+            const featuresH2 = document.querySelector('#features h2');
+            if (featuresH2) featuresH2.textContent = t.features.title;
+            const featureCards = document.querySelectorAll('#features .card');
+            if (featureCards.length >= 3) {
+                featureCards[0].querySelector('h3').textContent = t.features.vpn.title;
+                featureCards[1].querySelector('h3').textContent = t.features.subscriptions.title;
+                featureCards[2].querySelector('h3').textContent = t.features.security.title;
+                
+                const vpnItems = featureCards[0].querySelectorAll('li');
+                const subItems = featureCards[1].querySelectorAll('li');
+                const secItems = featureCards[2].querySelectorAll('li');
+                
+                t.features.vpn.items.forEach((item, i) => {
+                    if (vpnItems[i]) vpnItems[i].textContent = item;
+                });
+                t.features.subscriptions.items.forEach((item, i) => {
+                    if (subItems[i]) subItems[i].textContent = item;
+                });
+                t.features.security.items.forEach((item, i) => {
+                    if (secItems[i]) secItems[i].textContent = item;
+                });
+            }
+
+            // Update protocols section
+            const protocolsH2 = document.querySelector('#protocols h2');
+            if (protocolsH2) protocolsH2.textContent = t.protocols.title;
+            const protocolTable = document.querySelector('#protocols table');
+            if (protocolTable) {
+                const ths = protocolTable.querySelectorAll('th');
+                if (ths.length >= 2) {
+                    ths[0].textContent = t.protocols.table.protocol;
+                    ths[1].textContent = t.protocols.table.description;
+                }
+                
+                const protocolRows = protocolTable.querySelectorAll('tbody tr');
+                if (protocolRows.length >= 9) {
+                    protocolRows[0].querySelectorAll('td')[1].textContent = t.protocols.vless;
+                    protocolRows[1].querySelectorAll('td')[1].textContent = t.protocols.vmess;
+                    protocolRows[2].querySelectorAll('td')[1].textContent = t.protocols.trojan;
+                    protocolRows[3].querySelectorAll('td')[1].textContent = t.protocols.shadowsocks;
+                    protocolRows[4].querySelectorAll('td')[1].textContent = t.protocols.ssh;
+                    protocolRows[5].querySelectorAll('td')[1].textContent = t.protocols.hysteria;
+                    protocolRows[6].querySelectorAll('td')[1].textContent = t.protocols.hysteria2;
+                    protocolRows[7].querySelectorAll('td')[1].textContent = t.protocols.pingTunnel;
+                    protocolRows[8].querySelectorAll('td')[1].textContent = t.protocols.reality;
+                }
+            }
+
+            const protocolCard = document.querySelector('#protocols .card');
+            if (protocolCard) {
+                const h3s = protocolCard.querySelectorAll('h3');
+                const ps = protocolCard.querySelectorAll('p');
+                if (h3s.length >= 2) {
+                    h3s[0].textContent = t.protocols.transport;
+                    h3s[1].textContent = t.protocols.security;
+                }
+                if (ps.length >= 2) {
+                    ps[0].textContent = t.protocols.transportList;
+                    ps[1].textContent = t.protocols.securityList;
+                }
+            }
+
+            // Update architecture section
+            const archH2 = document.querySelector('#architecture h2');
+            if (archH2) archH2.textContent = t.architecture.title;
+            const archCards = document.querySelectorAll('#architecture .card');
+            if (archCards.length >= 4) {
+                archCards[0].querySelector('h3').textContent = t.architecture.frontend.title;
+                archCards[1].querySelector('h3').textContent = t.architecture.backend.title;
+                archCards[2].querySelector('h3').textContent = t.architecture.vpn.title;
+                archCards[3].querySelector('h3').textContent = t.architecture.pattern.title;
+                
+                t.architecture.frontend.items.forEach((item, i) => {
+                    const li = archCards[0].querySelectorAll('li')[i];
+                    if (li) li.textContent = item;
+                });
+                t.architecture.backend.items.forEach((item, i) => {
+                    const li = archCards[1].querySelectorAll('li')[i];
+                    if (li) li.textContent = item;
+                });
+                t.architecture.vpn.items.forEach((item, i) => {
+                    const li = archCards[2].querySelectorAll('li')[i];
+                    if (li) li.textContent = item;
+                });
+                t.architecture.pattern.items.forEach((item, i) => {
+                    const li = archCards[3].querySelectorAll('li')[i];
+                    if (li) li.textContent = item;
+                });
+            }
+
+            // Update screens section
+            const screensH2 = document.querySelector('#screens h2');
+            if (screensH2) screensH2.textContent = t.screens.title;
+            const screenItems = document.querySelectorAll('#screens .feature-item');
+            if (screenItems.length >= 6) {
+                screenItems[0].querySelector('div').innerHTML = `<strong>${t.screens.home.title}</strong><br>${t.screens.home.desc}`;
+                screenItems[1].querySelector('div').innerHTML = `<strong>${t.screens.serverList.title}</strong><br>${t.screens.serverList.desc}`;
+                screenItems[2].querySelector('div').innerHTML = `<strong>${t.screens.serverDetails.title}</strong><br>${t.screens.serverDetails.desc}`;
+                screenItems[3].querySelector('div').innerHTML = `<strong>${t.screens.settings.title}</strong><br>${t.screens.settings.desc}`;
+                screenItems[4].querySelector('div').innerHTML = `<strong>${t.screens.profile.title}</strong><br>${t.screens.profile.desc}`;
+                screenItems[5].querySelector('div').innerHTML = `<strong>${t.screens.tutorial.title}</strong><br>${t.screens.tutorial.desc}`;
+            }
+
+            // Update localization section
+            const locH2 = document.querySelector('#localization h2');
+            const locH3 = document.querySelector('#localization h3');
+            if (locH2) locH2.textContent = t.localization.title;
+            if (locH3) locH3.textContent = t.localization.subtitle;
+
+            // Update stats section
+            const statsH2 = document.querySelector('#stats h2');
+            if (statsH2) statsH2.textContent = t.stats.title;
+            const statsCards = document.querySelectorAll('#stats .card');
+            if (statsCards.length >= 4) {
+                statsCards[0].querySelector('h3').textContent = t.stats.code.title;
+                statsCards[0].querySelectorAll('p')[0].textContent = t.stats.code.value;
+                statsCards[0].querySelectorAll('p')[1].textContent = t.stats.code.desc;
+                statsCards[1].querySelector('h3').textContent = t.stats.language.title;
+                statsCards[1].querySelectorAll('p')[0].textContent = t.stats.language.value;
+                statsCards[1].querySelectorAll('p')[1].textContent = t.stats.language.desc;
+                statsCards[2].querySelector('h3').textContent = t.stats.ui.title;
+                statsCards[2].querySelectorAll('p')[0].textContent = t.stats.ui.value;
+                statsCards[2].querySelectorAll('p')[1].textContent = t.stats.ui.desc;
+                statsCards[3].querySelector('h3').textContent = t.stats.languages.title;
+                statsCards[3].querySelectorAll('p')[0].textContent = t.stats.languages.value;
+                statsCards[3].querySelectorAll('p')[1].textContent = t.stats.languages.desc;
+            }
+
+            // Update footer
+            const footerPs = document.querySelectorAll('footer p');
+            if (footerPs.length >= 2) {
+                footerPs[0].textContent = t.footer.copyright;
+                footerPs[1].textContent = t.footer.version;
+            }
+
+            // Update active language option
+            document.querySelectorAll('.language-option').forEach(opt => {
+                opt.classList.remove('active');
+            });
+            document.querySelectorAll('.language-option').forEach(opt => {
+                if (opt.getAttribute('onclick').includes(`'${lang}'`)) {
+                    opt.classList.add('active');
+                }
+            });
+
+            // Close dropdown
+            const dropdown = document.getElementById('languageDropdown');
+            if (dropdown) dropdown.classList.remove('show');
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
         }
 
         // Smooth scrolling
