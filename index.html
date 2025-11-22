@@ -27,10 +27,10 @@
             line-height: 1.6;
             color: var(--text-light);
             /* Для GitHub Pages используйте относительный путь:
-               - Если изображение в папке images/: url('images/8k back web.jpg')
-               - Если изображение в корне репозитория: url('./8k back web.jpg')
+               - Если изображение в папке images/: url('images/4k back web.jpg')
+               - Если изображение в корне репозитория: url('./4k back web.jpg')
             */
-            background: url('./8k back web.jpg') center center / cover no-repeat fixed;
+            background: url('./4k back web.jpg') center center / cover no-repeat fixed;
             min-height: 100vh;
             position: relative;
         }
@@ -197,6 +197,14 @@
             }
         }
 
+        /* Mobile background image */
+        @media screen and (max-width: 768px) {
+            body {
+                /* Для мобильной версии используется оптимизированное изображение */
+                background: url('./mobile 8k back web.jpg') center center / cover no-repeat fixed;
+            }
+        }
+        
         @media screen and (max-width: 768px) {
             .mobile-only {
                 display: flex !important;
