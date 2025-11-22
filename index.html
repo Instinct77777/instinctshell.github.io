@@ -1013,7 +1013,7 @@
             
             <!-- Features Section -->
             <div style="margin-top: 2rem;">
-                <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-light);">🎯 Key Features</h2>
+                <h2 id="features-title" style="font-size: 2rem; margin-bottom: 1.5rem; color: var(--text-light);">🎯 Key Features</h2>
                 <div class="cards-grid">
                     <div class="card">
                         <h3>🔒 VPN Connection Management</h3>
@@ -1162,7 +1162,7 @@
         <section id="localization" class="section">
             <h2>🌍 Localization</h2>
             <div class="card">
-                <h3>Supported Languages (12)</h3>
+                <h3 id="localization-subtitle">Supported Languages (12)</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
                     <div>🇷🇺 Русский</div>
                     <div>🇬🇧 Английский</div>
@@ -1354,12 +1354,12 @@
                     versionCode: 'Version Code:',
                     buildType: 'Build Type:',
                     androidReq: '📱 Требования Android',
-                    minSdk: 'Minimum SDK:',
-                    targetSdk: 'Target SDK:',
-                    compileSdk: 'Compile SDK:',
-                    supportedAbis: 'Supported ABIs:',
+                    minSdk: 'Минимальный SDK:',
+                    targetSdk: 'Целевой SDK:',
+                    compileSdk: 'Компиляция SDK:',
+                    supportedAbis: 'Поддерживаемые ABI:',
                     localization: '🌍 Локализация',
-                    supportedLanguages: 'Supported Languages:',
+                    supportedLanguages: 'Поддерживаемые языки:',
                     languagesList: '🇷🇺 Русский, 🇬🇧 Английский, 🇧🇾 Белорусский, 🇺🇦 Украинский, 🇨🇿 Чеченский, 🇪🇸 Испанский, 🇸🇦 Арабский (RTL), 🇩🇪 Немецкий, 🇨🇳 Китайский, 🇮🇱 Иврит (RTL), 🇹🇯 Таджикский, 🇰🇿 Казахский',
                     technicalDetails: '🔧 Технические детали',
                     architecture: 'Architecture:',
@@ -1499,6 +1499,79 @@
                 },
                 footer: {
                     copyright: '2025 InstinctShell Team.'
+                },
+                privacy: {
+                    title: 'Политика конфиденциальности InstinctShell',
+                    lastUpdated: 'Последнее обновление:',
+                    date: '[Дата]',
+                    intro: 'InstinctShell ("мы", "наш", "приложение") уважает вашу конфиденциальность и стремится защитить ваши личные данные. Эта Политика конфиденциальности объясняет, как мы собираем, используем, раскрываем и защищаем вашу информацию при использовании нашего VPN-приложения.',
+                    section1Title: '1. Собираемая информация',
+                    section1Text: 'InstinctShell собирает минимально необходимую информацию для обеспечения работы VPN-сервиса:',
+                    section1Item1: 'Технические данные: Информация об устройстве, версия Android, модель устройства',
+                    section1Item2: 'Данные подключения: Статус VPN-подключения, выбранный сервер, время подключения',
+                    section1Item3: 'Данные подписок: URL подписок, которые вы добавляете вручную (хранятся локально)',
+                    section1Item4: 'Настройки приложения: Ваши предпочтения (язык, тема, настройки VPN)',
+                    section2Title: '2. Что мы НЕ собираем',
+                    section2Text: 'InstinctShell НЕ собирает и НЕ передает:',
+                    section2Item1: 'Ваш интернет-трафик или содержимое ваших запросов',
+                    section2Item2: 'Историю просмотров или посещенные веб-сайты',
+                    section2Item3: 'Персональные данные (имя, email, телефон)',
+                    section2Item4: 'Локацию или GPS-координаты',
+                    section2Item5: 'Контакты или сообщения',
+                    section2Item6: 'Данные других приложений',
+                    section3Title: '3. Использование информации',
+                    section3Text: 'Собранная информация используется исключительно для:',
+                    section3Item1: 'Обеспечения работы VPN-подключения',
+                    section3Item2: 'Улучшения функциональности приложения',
+                    section3Item3: 'Исправления ошибок и оптимизации производительности',
+                    section3Item4: 'Предоставления поддержки пользователям',
+                    section4Title: '4. Хранение данных',
+                    section4Text: 'Все данные хранятся локально на вашем устройстве:',
+                    section4Item1: 'Конфигурации серверов хранятся в локальной базе данных Room',
+                    section4Item2: 'Настройки приложения хранятся в локальном хранилище (MMKV)',
+                    section4Item3: 'Мы НЕ отправляем данные на внешние серверы',
+                    section4Item4: 'Мы НЕ используем аналитику или трекинг',
+                    section5Title: '5. VPN-серверы',
+                    section5Text: 'Важно понимать:',
+                    section5Item1: 'InstinctShell - это клиентское приложение для управления VPN-подключениями',
+                    section5Item2: 'Мы НЕ предоставляем VPN-серверы - вы используете свои собственные серверы или серверы вашего провайдера',
+                    section5Item3: 'Трафик проходит через выбранные вами VPN-серверы согласно их политике конфиденциальности',
+                    section5Item4: 'Мы не имеем доступа к трафику, проходящему через VPN-серверы',
+                    section6Title: '6. Разрешения приложения',
+                    section6Text: 'InstinctShell запрашивает следующие разрешения:',
+                    section6Item1: 'VPN: Необходимо для создания VPN-туннеля (основная функция приложения)',
+                    section6Item2: 'Интернет: Для подключения к VPN-серверам и обновления подписок',
+                    section6Item3: 'Уведомления: Для отображения статуса VPN-подключения',
+                    section6Item4: 'Запуск при загрузке: Для автоматического переподключения (опционально)',
+                    section7Title: '7. Третьи стороны',
+                    section7Text: 'InstinctShell использует следующие open-source библиотеки:',
+                    section7Item1: 'Xray-core (Mozilla Public License 2.0)',
+                    section7Item2: 'Android Jetpack библиотеки (Apache 2.0)',
+                    section7Item3: 'Retrofit/OkHttp (Apache 2.0)',
+                    section7Item4: 'Room Database (Apache 2.0)',
+                    section7Note: 'Эти библиотеки не собирают личные данные.',
+                    section8Title: '8. Безопасность',
+                    section8Text: 'Мы принимаем меры для защиты ваших данных:',
+                    section8Item1: 'Все данные хранятся локально на устройстве',
+                    section8Item2: 'Использование шифрования для хранения конфигураций',
+                    section8Item3: 'Минимизация собираемых данных',
+                    section8Item4: 'Отсутствие отправки данных на внешние серверы',
+                    section9Title: '9. Ваши права',
+                    section9Text: 'Вы имеете право:',
+                    section9Item1: 'Удалить все данные приложения, удалив приложение',
+                    section9Item2: 'Экспортировать ваши конфигурации',
+                    section9Item3: 'Не использовать определенные функции',
+                    section9Item4: 'Отключить автоматическое обновление подписок',
+                    section10Title: '10. Изменения в политике',
+                    section10Text: 'Мы можем обновлять эту Политику конфиденциальности время от времени. Все изменения будут отражены в этой странице с указанием даты последнего обновления.',
+                    section11Title: '11. Контакты',
+                    section11Text: 'Если у вас есть вопросы о этой Политике конфиденциальности, пожалуйста, свяжитесь с нами:',
+                    section11Email: 'Email:',
+                    section11EmailValue: '[Ваш email]',
+                    section11Developer: 'Разработчик:',
+                    section11DeveloperValue: 'InstinctShell Team',
+                    section12Title: '12. Согласие',
+                    section12Text: 'Используя InstinctShell, вы соглашаетесь с этой Политикой конфиденциальности. Если вы не согласны с этой политикой, пожалуйста, не используйте наше приложение.'
                 }
             },
             en: {
@@ -1676,6 +1749,79 @@
                 },
                 footer: {
                     copyright: '2025 InstinctShell Team.'
+                },
+                privacy: {
+                    title: 'InstinctShell Privacy Policy',
+                    lastUpdated: 'Last Updated:',
+                    date: '[Date]',
+                    intro: 'InstinctShell ("we", "our", "app") respects your privacy and is committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and protect your information when using our VPN application.',
+                    section1Title: '1. Information Collected',
+                    section1Text: 'InstinctShell collects the minimum necessary information to provide VPN service:',
+                    section1Item1: 'Technical Data: Device information, Android version, device model',
+                    section1Item2: 'Connection Data: VPN connection status, selected server, connection time',
+                    section1Item3: 'Subscription Data: Subscription URLs that you manually add (stored locally)',
+                    section1Item4: 'App Settings: Your preferences (language, theme, VPN settings)',
+                    section2Title: '2. What We Do NOT Collect',
+                    section2Text: 'InstinctShell does NOT collect or transmit:',
+                    section2Item1: 'Your internet traffic or the content of your requests',
+                    section2Item2: 'Browsing history or visited websites',
+                    section2Item3: 'Personal data (name, email, phone)',
+                    section2Item4: 'Location or GPS coordinates',
+                    section2Item5: 'Contacts or messages',
+                    section2Item6: 'Data from other applications',
+                    section3Title: '3. Use of Information',
+                    section3Text: 'Collected information is used exclusively for:',
+                    section3Item1: 'Providing VPN connection functionality',
+                    section3Item2: 'Improving app functionality',
+                    section3Item3: 'Fixing bugs and optimizing performance',
+                    section3Item4: 'Providing user support',
+                    section4Title: '4. Data Storage',
+                    section4Text: 'All data is stored locally on your device:',
+                    section4Item1: 'Server configurations are stored in local Room database',
+                    section4Item2: 'App settings are stored in local storage (MMKV)',
+                    section4Item3: 'We do NOT send data to external servers',
+                    section4Item4: 'We do NOT use analytics or tracking',
+                    section5Title: '5. VPN Servers',
+                    section5Text: 'It is important to understand:',
+                    section5Item1: 'InstinctShell is a client application for managing VPN connections',
+                    section5Item2: 'We do NOT provide VPN servers - you use your own servers or your provider\'s servers',
+                    section5Item3: 'Traffic passes through VPN servers you choose according to their privacy policy',
+                    section5Item4: 'We do not have access to traffic passing through VPN servers',
+                    section6Title: '6. App Permissions',
+                    section6Text: 'InstinctShell requests the following permissions:',
+                    section6Item1: 'VPN: Required to create VPN tunnel (main app function)',
+                    section6Item2: 'Internet: To connect to VPN servers and update subscriptions',
+                    section6Item3: 'Notifications: To display VPN connection status',
+                    section6Item4: 'Boot: For automatic reconnection (optional)',
+                    section7Title: '7. Third Parties',
+                    section7Text: 'InstinctShell uses the following open-source libraries:',
+                    section7Item1: 'Xray-core (Mozilla Public License 2.0)',
+                    section7Item2: 'Android Jetpack libraries (Apache 2.0)',
+                    section7Item3: 'Retrofit/OkHttp (Apache 2.0)',
+                    section7Item4: 'Room Database (Apache 2.0)',
+                    section7Note: 'These libraries do not collect personal data.',
+                    section8Title: '8. Security',
+                    section8Text: 'We take measures to protect your data:',
+                    section8Item1: 'All data is stored locally on the device',
+                    section8Item2: 'Use of encryption for storing configurations',
+                    section8Item3: 'Minimization of collected data',
+                    section8Item4: 'No sending of data to external servers',
+                    section9Title: '9. Your Rights',
+                    section9Text: 'You have the right to:',
+                    section9Item1: 'Delete all app data by uninstalling the app',
+                    section9Item2: 'Export your configurations',
+                    section9Item3: 'Not use certain features',
+                    section9Item4: 'Disable automatic subscription updates',
+                    section10Title: '10. Policy Changes',
+                    section10Text: 'We may update this Privacy Policy from time to time. All changes will be reflected on this page with the date of last update.',
+                    section11Title: '11. Contact',
+                    section11Text: 'If you have questions about this Privacy Policy, please contact us:',
+                    section11Email: 'Email:',
+                    section11EmailValue: '[Your email]',
+                    section11Developer: 'Developer:',
+                    section11DeveloperValue: 'InstinctShell Team',
+                    section12Title: '12. Consent',
+                    section12Text: 'By using InstinctShell, you agree to this Privacy Policy. If you do not agree with this policy, please do not use our app.'
                 }
             },
             zh: {
@@ -1708,12 +1854,12 @@
                     versionCode: 'Version Code:',
                     buildType: 'Build Type:',
                     androidReq: '📱 Android要求',
-                    minSdk: 'Minimum SDK:',
-                    targetSdk: 'Target SDK:',
-                    compileSdk: 'Compile SDK:',
-                    supportedAbis: 'Supported ABIs:',
+                    minSdk: '最低SDK：',
+                    targetSdk: '目标SDK：',
+                    compileSdk: '编译SDK：',
+                    supportedAbis: '支持的ABI：',
                     localization: '🌍 本地化',
-                    supportedLanguages: 'Supported Languages:',
+                    supportedLanguages: '支持的语言：',
                     languagesList: '🇷🇺 俄语, 🇬🇧 英语, 🇧🇾 白俄罗斯语, 🇺🇦 乌克兰语, 🇨🇿 车臣语, 🇪🇸 西班牙语, 🇸🇦 阿拉伯语 (RTL), 🇩🇪 德语, 🇨🇳 中文, 🇮🇱 希伯来语 (RTL), 🇹🇯 塔吉克语, 🇰🇿 哈萨克语',
                     technicalDetails: '🔧 技术细节',
                     architecture: 'Architecture:',
@@ -1853,6 +1999,79 @@
                 },
                 footer: {
                     copyright: '2025 InstinctShell Team.'
+                },
+                privacy: {
+                    title: 'InstinctShell 隐私政策',
+                    lastUpdated: '最后更新：',
+                    date: '[日期]',
+                    intro: 'InstinctShell（"我们"、"我们的"、"应用程序"）尊重您的隐私，致力于保护您的个人数据。本隐私政策解释了我们在您使用我们的VPN应用程序时如何收集、使用、披露和保护您的信息。',
+                    section1Title: '1. 收集的信息',
+                    section1Text: 'InstinctShell收集提供VPN服务所需的最少信息：',
+                    section1Item1: '技术数据：设备信息、Android版本、设备型号',
+                    section1Item2: '连接数据：VPN连接状态、所选服务器、连接时间',
+                    section1Item3: '订阅数据：您手动添加的订阅URL（本地存储）',
+                    section1Item4: '应用程序设置：您的偏好（语言、主题、VPN设置）',
+                    section2Title: '2. 我们不收集的内容',
+                    section2Text: 'InstinctShell不收集或传输：',
+                    section2Item1: '您的互联网流量或请求内容',
+                    section2Item2: '浏览历史或访问的网站',
+                    section2Item3: '个人数据（姓名、电子邮件、电话）',
+                    section2Item4: '位置或GPS坐标',
+                    section2Item5: '联系人或消息',
+                    section2Item6: '其他应用程序的数据',
+                    section3Title: '3. 信息使用',
+                    section3Text: '收集的信息仅用于：',
+                    section3Item1: '提供VPN连接功能',
+                    section3Item2: '改进应用程序功能',
+                    section3Item3: '修复错误和优化性能',
+                    section3Item4: '提供用户支持',
+                    section4Title: '4. 数据存储',
+                    section4Text: '所有数据都本地存储在您的设备上：',
+                    section4Item1: '服务器配置存储在本地Room数据库中',
+                    section4Item2: '应用程序设置存储在本地存储（MMKV）中',
+                    section4Item3: '我们不向外部服务器发送数据',
+                    section4Item4: '我们不使用分析或跟踪',
+                    section5Title: '5. VPN服务器',
+                    section5Text: '重要的是要理解：',
+                    section5Item1: 'InstinctShell是用于管理VPN连接的客户端应用程序',
+                    section5Item2: '我们不提供VPN服务器 - 您使用自己的服务器或提供商的服务器',
+                    section5Item3: '流量根据其隐私政策通过您选择的VPN服务器',
+                    section5Item4: '我们无法访问通过VPN服务器的流量',
+                    section6Title: '6. 应用程序权限',
+                    section6Text: 'InstinctShell请求以下权限：',
+                    section6Item1: 'VPN：创建VPN隧道所需（主要应用程序功能）',
+                    section6Item2: '互联网：连接到VPN服务器和更新订阅',
+                    section6Item3: '通知：显示VPN连接状态',
+                    section6Item4: '启动：自动重新连接（可选）',
+                    section7Title: '7. 第三方',
+                    section7Text: 'InstinctShell使用以下开源库：',
+                    section7Item1: 'Xray-core（Mozilla公共许可证2.0）',
+                    section7Item2: 'Android Jetpack库（Apache 2.0）',
+                    section7Item3: 'Retrofit/OkHttp（Apache 2.0）',
+                    section7Item4: 'Room数据库（Apache 2.0）',
+                    section7Note: '这些库不收集个人数据。',
+                    section8Title: '8. 安全性',
+                    section8Text: '我们采取措施保护您的数据：',
+                    section8Item1: '所有数据都本地存储在设备上',
+                    section8Item2: '使用加密存储配置',
+                    section8Item3: '最小化收集的数据',
+                    section8Item4: '不向外部服务器发送数据',
+                    section9Title: '9. 您的权利',
+                    section9Text: '您有权：',
+                    section9Item1: '通过卸载应用程序删除所有应用程序数据',
+                    section9Item2: '导出您的配置',
+                    section9Item3: '不使用某些功能',
+                    section9Item4: '禁用自动订阅更新',
+                    section10Title: '10. 政策变更',
+                    section10Text: '我们可能会不时更新本隐私政策。所有变更将在此页面上反映，并注明最后更新日期。',
+                    section11Title: '11. 联系方式',
+                    section11Text: '如果您对本隐私政策有疑问，请联系我们：',
+                    section11Email: '电子邮件：',
+                    section11EmailValue: '[您的电子邮件]',
+                    section11Developer: '开发者：',
+                    section11DeveloperValue: 'InstinctShell Team',
+                    section12Title: '12. 同意',
+                    section12Text: '使用InstinctShell即表示您同意本隐私政策。如果您不同意本政策，请不要使用我们的应用程序。'
                 }
             }
         };
@@ -1959,6 +2178,98 @@
             const privacyH2 = document.querySelector('#privacy h2');
             if (privacyH2) privacyH2.textContent = `🔒 ${t.nav.privacy}`;
             
+            const privacySection = document.querySelector('#privacy .privacy-section');
+            if (privacySection && t.privacy) {
+                privacySection.innerHTML = `
+                    <h3>${t.privacy.title}</h3>
+                    <p><strong>${t.privacy.lastUpdated}</strong> ${t.privacy.date}</p>
+                    <p>${t.privacy.intro}</p>
+                    <h3>${t.privacy.section1Title}</h3>
+                    <p>${t.privacy.section1Text}</p>
+                    <ul>
+                        <li><strong>${t.privacy.section1Item1}</strong></li>
+                        <li><strong>${t.privacy.section1Item2}</strong></li>
+                        <li><strong>${t.privacy.section1Item3}</strong></li>
+                        <li><strong>${t.privacy.section1Item4}</strong></li>
+                    </ul>
+                    <h3>${t.privacy.section2Title}</h3>
+                    <p>${t.privacy.section2Text}</p>
+                    <ul>
+                        <li>${t.privacy.section2Item1}</li>
+                        <li>${t.privacy.section2Item2}</li>
+                        <li>${t.privacy.section2Item3}</li>
+                        <li>${t.privacy.section2Item4}</li>
+                        <li>${t.privacy.section2Item5}</li>
+                        <li>${t.privacy.section2Item6}</li>
+                    </ul>
+                    <h3>${t.privacy.section3Title}</h3>
+                    <p>${t.privacy.section3Text}</p>
+                    <ul>
+                        <li>${t.privacy.section3Item1}</li>
+                        <li>${t.privacy.section3Item2}</li>
+                        <li>${t.privacy.section3Item3}</li>
+                        <li>${t.privacy.section3Item4}</li>
+                    </ul>
+                    <h3>${t.privacy.section4Title}</h3>
+                    <p>${t.privacy.section4Text}</p>
+                    <ul>
+                        <li>${t.privacy.section4Item1}</li>
+                        <li>${t.privacy.section4Item2}</li>
+                        <li>${t.privacy.section4Item3}</li>
+                        <li>${t.privacy.section4Item4}</li>
+                    </ul>
+                    <h3>${t.privacy.section5Title}</h3>
+                    <p>${t.privacy.section5Text}</p>
+                    <ul>
+                        <li>${t.privacy.section5Item1}</li>
+                        <li>${t.privacy.section5Item2}</li>
+                        <li>${t.privacy.section5Item3}</li>
+                        <li>${t.privacy.section5Item4}</li>
+                    </ul>
+                    <h3>${t.privacy.section6Title}</h3>
+                    <p>${t.privacy.section6Text}</p>
+                    <ul>
+                        <li><strong>${t.privacy.section6Item1}</strong></li>
+                        <li><strong>${t.privacy.section6Item2}</strong></li>
+                        <li><strong>${t.privacy.section6Item3}</strong></li>
+                        <li><strong>${t.privacy.section6Item4}</strong></li>
+                    </ul>
+                    <h3>${t.privacy.section7Title}</h3>
+                    <p>${t.privacy.section7Text}</p>
+                    <ul>
+                        <li>${t.privacy.section7Item1}</li>
+                        <li>${t.privacy.section7Item2}</li>
+                        <li>${t.privacy.section7Item3}</li>
+                        <li>${t.privacy.section7Item4}</li>
+                    </ul>
+                    <p>${t.privacy.section7Note}</p>
+                    <h3>${t.privacy.section8Title}</h3>
+                    <p>${t.privacy.section8Text}</p>
+                    <ul>
+                        <li>${t.privacy.section8Item1}</li>
+                        <li>${t.privacy.section8Item2}</li>
+                        <li>${t.privacy.section8Item3}</li>
+                        <li>${t.privacy.section8Item4}</li>
+                    </ul>
+                    <h3>${t.privacy.section9Title}</h3>
+                    <p>${t.privacy.section9Text}</p>
+                    <ul>
+                        <li>${t.privacy.section9Item1}</li>
+                        <li>${t.privacy.section9Item2}</li>
+                        <li>${t.privacy.section9Item3}</li>
+                        <li>${t.privacy.section9Item4}</li>
+                    </ul>
+                    <h3>${t.privacy.section10Title}</h3>
+                    <p>${t.privacy.section10Text}</p>
+                    <h3>${t.privacy.section11Title}</h3>
+                    <p>${t.privacy.section11Text}</p>
+                    <p><strong>${t.privacy.section11Email}</strong> ${t.privacy.section11EmailValue}</p>
+                    <p><strong>${t.privacy.section11Developer}</strong> ${t.privacy.section11DeveloperValue}</p>
+                    <h3>${t.privacy.section12Title}</h3>
+                    <p>${t.privacy.section12Text}</p>
+                `;
+            }
+            
             // Update Telegram button in hero
             const telegramHeroBtn = document.getElementById('telegram-hero-btn');
             if (telegramHeroBtn && t.sidebar) {
@@ -2008,8 +2319,12 @@
             if (aboutSection) {
                 // Update features section
                 const featuresH2 = aboutSection.querySelector('h2:last-of-type');
+                const featuresTitleById = document.getElementById('features-title');
                 if (featuresH2 && featuresH2.textContent.includes('🎯')) {
                     featuresH2.textContent = t.features.title;
+                }
+                if (featuresTitleById) {
+                    featuresTitleById.textContent = t.features.title;
                 }
                 const featureCards = aboutSection.querySelectorAll('.cards-grid .card');
                 if (featureCards.length >= 3) {
@@ -2080,8 +2395,10 @@
             // Update localization section
             const locH2 = document.querySelector('#localization h2');
             const locH3 = document.querySelector('#localization h3');
+            const locSubtitle = document.getElementById('localization-subtitle');
             if (locH2) locH2.textContent = t.localization.title;
             if (locH3) locH3.textContent = t.localization.subtitle;
+            if (locSubtitle) locSubtitle.textContent = t.localization.subtitle;
 
             // Update tutorial section
             const tutorialH2 = document.querySelector('#tutorial h2');
