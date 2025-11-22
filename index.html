@@ -474,6 +474,7 @@
             <div class="logo">🛡️ InstinctShell</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#protocols">Protocols</a></li>
                 <li><a href="#architecture">Architecture</a></li>
@@ -517,9 +518,36 @@
             <div class="card">
                 <p><strong>InstinctShell</strong> is a modern Android application for managing VPN subscriptions with support for multiple protocols and advanced security features.</p>
                 <br>
-                <p><strong>Version:</strong> 1.9.7</p>
-                <p><strong>Minimum Android version:</strong> 7.0 (API 24)</p>
-                <p><strong>Target version:</strong> Android 15 (API 35)</p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                    <div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--secondary-color);">📦 Application Info</h3>
+                        <p><strong>Package Name:</strong> com.instinct.InstinctShell</p>
+                        <p><strong>Version Name:</strong> 1.9.7</p>
+                        <p><strong>Version Code:</strong> 17</p>
+                        <p><strong>Build Type:</strong> Release</p>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--secondary-color);">📱 Android Requirements</h3>
+                        <p><strong>Minimum SDK:</strong> 24 (Android 7.0)</p>
+                        <p><strong>Target SDK:</strong> 35 (Android 15)</p>
+                        <p><strong>Compile SDK:</strong> 35</p>
+                        <p><strong>Supported ABIs:</strong> arm64-v8a, x86_64</p>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--secondary-color);">🌍 Localization</h3>
+                        <p><strong>Supported Languages:</strong> 12</p>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">🇷🇺 Russian, 🇬🇧 English, 🇧🇾 Belarusian, 🇺🇦 Ukrainian, 🇨🇿 Chechen, 🇪🇸 Spanish, 🇸🇦 Arabic (RTL), 🇩🇪 German, 🇨🇳 Chinese, 🇮🇱 Hebrew (RTL), 🇹🇯 Tajik, 🇰🇿 Kazakh</p>
+                    </div>
+                </div>
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--glass-border);">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--secondary-color);">🔧 Technical Details</h3>
+                    <p><strong>Architecture:</strong> MVVM Pattern with Jetpack Compose</p>
+                    <p><strong>Core VPN Engine:</strong> Xray-core with native libraries</p>
+                    <p><strong>Database:</strong> Room Database</p>
+                    <p><strong>Dependency Injection:</strong> Hilt (Dagger)</p>
+                    <p><strong>Network:</strong> Retrofit/OkHttp</p>
+                    <p><strong>UI Framework:</strong> Jetpack Compose with Material Design 3</p>
+                </div>
             </div>
         </section>
 
@@ -877,6 +905,7 @@
             ru: {
                 nav: {
                     home: 'Главная',
+                    about: 'О проекте',
                     features: 'Возможности',
                     protocols: 'Протоколы',
                     architecture: 'Архитектура',
@@ -890,9 +919,26 @@
                 about: {
                     title: '📋 О проекте',
                     description: '**InstinctShell** — это современное Android-приложение для управления VPN-подписками с поддержкой множества протоколов и расширенными функциями безопасности.',
-                    version: 'Версия:',
-                    minAndroid: 'Минимальная версия Android:',
-                    targetAndroid: 'Целевая версия:'
+                    appInfo: '📦 Информация о приложении',
+                    packageName: 'Package Name:',
+                    versionName: 'Version Name:',
+                    versionCode: 'Version Code:',
+                    buildType: 'Build Type:',
+                    androidReq: '📱 Требования Android',
+                    minSdk: 'Minimum SDK:',
+                    targetSdk: 'Target SDK:',
+                    compileSdk: 'Compile SDK:',
+                    supportedAbis: 'Supported ABIs:',
+                    localization: '🌍 Локализация',
+                    supportedLanguages: 'Supported Languages:',
+                    languagesList: '🇷🇺 Русский, 🇬🇧 Английский, 🇧🇾 Белорусский, 🇺🇦 Украинский, 🇨🇿 Чеченский, 🇪🇸 Испанский, 🇸🇦 Арабский (RTL), 🇩🇪 Немецкий, 🇨🇳 Китайский, 🇮🇱 Иврит (RTL), 🇹🇯 Таджикский, 🇰🇿 Казахский',
+                    technicalDetails: '🔧 Технические детали',
+                    architecture: 'Architecture:',
+                    coreEngine: 'Core VPN Engine:',
+                    database: 'Database:',
+                    di: 'Dependency Injection:',
+                    network: 'Network:',
+                    uiFramework: 'UI Framework:'
                 },
                 features: {
                     title: '🎯 Основные возможности',
@@ -994,6 +1040,7 @@
             en: {
                 nav: {
                     home: 'Home',
+                    about: 'About',
                     features: 'Features',
                     protocols: 'Protocols',
                     architecture: 'Architecture',
@@ -1007,9 +1054,26 @@
                 about: {
                     title: '📋 About',
                     description: '**InstinctShell** is a modern Android application for managing VPN subscriptions with support for multiple protocols and advanced security features.',
-                    version: 'Version:',
-                    minAndroid: 'Minimum Android version:',
-                    targetAndroid: 'Target version:'
+                    appInfo: '📦 Application Info',
+                    packageName: 'Package Name:',
+                    versionName: 'Version Name:',
+                    versionCode: 'Version Code:',
+                    buildType: 'Build Type:',
+                    androidReq: '📱 Android Requirements',
+                    minSdk: 'Minimum SDK:',
+                    targetSdk: 'Target SDK:',
+                    compileSdk: 'Compile SDK:',
+                    supportedAbis: 'Supported ABIs:',
+                    localization: '🌍 Localization',
+                    supportedLanguages: 'Supported Languages:',
+                    languagesList: '🇷🇺 Russian, 🇬🇧 English, 🇧🇾 Belarusian, 🇺🇦 Ukrainian, 🇨🇿 Chechen, 🇪🇸 Spanish, 🇸🇦 Arabic (RTL), 🇩🇪 German, 🇨🇳 Chinese, 🇮🇱 Hebrew (RTL), 🇹🇯 Tajik, 🇰🇿 Kazakh',
+                    technicalDetails: '🔧 Technical Details',
+                    architecture: 'Architecture:',
+                    coreEngine: 'Core VPN Engine:',
+                    database: 'Database:',
+                    di: 'Dependency Injection:',
+                    network: 'Network:',
+                    uiFramework: 'UI Framework:'
                 },
                 features: {
                     title: '🎯 Key Features',
@@ -1111,6 +1175,7 @@
             zh: {
                 nav: {
                     home: '首页',
+                    about: '关于',
                     features: '功能',
                     protocols: '协议',
                     architecture: '架构',
@@ -1124,9 +1189,26 @@
                 about: {
                     title: '📋 关于项目',
                     description: '**InstinctShell** 是一个现代化的Android应用程序，用于管理VPN订阅，支持多种协议和高级安全功能。',
-                    version: '版本：',
-                    minAndroid: '最低Android版本：',
-                    targetAndroid: '目标版本：'
+                    appInfo: '📦 应用程序信息',
+                    packageName: 'Package Name:',
+                    versionName: 'Version Name:',
+                    versionCode: 'Version Code:',
+                    buildType: 'Build Type:',
+                    androidReq: '📱 Android要求',
+                    minSdk: 'Minimum SDK:',
+                    targetSdk: 'Target SDK:',
+                    compileSdk: 'Compile SDK:',
+                    supportedAbis: 'Supported ABIs:',
+                    localization: '🌍 本地化',
+                    supportedLanguages: 'Supported Languages:',
+                    languagesList: '🇷🇺 俄语, 🇬🇧 英语, 🇧🇾 白俄罗斯语, 🇺🇦 乌克兰语, 🇨🇿 车臣语, 🇪🇸 西班牙语, 🇸🇦 阿拉伯语 (RTL), 🇩🇪 德语, 🇨🇳 中文, 🇮🇱 希伯来语 (RTL), 🇹🇯 塔吉克语, 🇰🇿 哈萨克语',
+                    technicalDetails: '🔧 技术细节',
+                    architecture: 'Architecture:',
+                    coreEngine: 'Core VPN Engine:',
+                    database: 'Database:',
+                    di: 'Dependency Injection:',
+                    network: 'Network:',
+                    uiFramework: 'UI Framework:'
                 },
                 features: {
                     title: '🎯 主要功能',
@@ -1273,12 +1355,13 @@
 
             // Update navigation
             const navLinks = document.querySelectorAll('.nav-links a');
-            if (navLinks.length >= 5) {
+            if (navLinks.length >= 6) {
                 navLinks[0].textContent = t.nav.home;
-                navLinks[1].textContent = t.nav.features;
-                navLinks[2].textContent = t.nav.protocols;
-                navLinks[3].textContent = t.nav.architecture;
-                navLinks[4].textContent = t.nav.privacy;
+                navLinks[1].textContent = t.nav.about;
+                navLinks[2].textContent = t.nav.features;
+                navLinks[3].textContent = t.nav.protocols;
+                navLinks[4].textContent = t.nav.architecture;
+                navLinks[5].textContent = t.nav.privacy;
             }
 
             // Update hero section
@@ -1294,12 +1377,40 @@
             const aboutCard = document.querySelector('#about .card');
             if (aboutH2) aboutH2.textContent = t.about.title;
             if (aboutCard) {
+                const desc = t.about.description.replace('**InstinctShell** — это', '').replace('**InstinctShell** is', '').replace('**InstinctShell** 是一个', '').replace('**InstinctShell**', '');
                 aboutCard.innerHTML = `
-                    <p><strong>InstinctShell</strong> ${t.about.description.replace('**InstinctShell** — это', '').replace('**InstinctShell** is', '').replace('**InstinctShell** 是一个', '').replace('**InstinctShell**', '')}</p>
+                    <p><strong>InstinctShell</strong> ${desc}</p>
                     <br>
-                    <p><strong>${t.about.version}</strong> 1.9.7</p>
-                    <p><strong>${t.about.minAndroid}</strong> 7.0 (API 24)</p>
-                    <p><strong>${t.about.targetAndroid}</strong> Android 15 (API 35)</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                        <div>
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--secondary-color);">${t.about.appInfo}</h3>
+                            <p><strong>${t.about.packageName}</strong> com.instinct.InstinctShell</p>
+                            <p><strong>${t.about.versionName}</strong> 1.9.7</p>
+                            <p><strong>${t.about.versionCode}</strong> 17</p>
+                            <p><strong>${t.about.buildType}</strong> Release</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--secondary-color);">${t.about.androidReq}</h3>
+                            <p><strong>${t.about.minSdk}</strong> 24 (Android 7.0)</p>
+                            <p><strong>${t.about.targetSdk}</strong> 35 (Android 15)</p>
+                            <p><strong>${t.about.compileSdk}</strong> 35</p>
+                            <p><strong>${t.about.supportedAbis}</strong> arm64-v8a, x86_64</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--secondary-color);">${t.about.localization}</h3>
+                            <p><strong>${t.about.supportedLanguages}</strong> 12</p>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem;">${t.about.languagesList}</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--glass-border);">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--secondary-color);">${t.about.technicalDetails}</h3>
+                        <p><strong>${t.about.architecture}</strong> MVVM Pattern with Jetpack Compose</p>
+                        <p><strong>${t.about.coreEngine}</strong> Xray-core with native libraries</p>
+                        <p><strong>${t.about.database}</strong> Room Database</p>
+                        <p><strong>${t.about.di}</strong> Hilt (Dagger)</p>
+                        <p><strong>${t.about.network}</strong> Retrofit/OkHttp</p>
+                        <p><strong>${t.about.uiFramework}</strong> Jetpack Compose with Material Design 3</p>
+                    </div>
                 `;
             }
 
