@@ -45,6 +45,17 @@
             background: rgba(0, 0, 0, 0.3);
             z-index: -1;
         }
+        
+        /* Mobile background image - placed right after body styles for higher priority */
+        @media screen and (max-width: 768px) {
+            body {
+                background-image: url('./mobile 8k back web.jpg') !important;
+                background-position: center center !important;
+                background-size: cover !important;
+                background-repeat: no-repeat !important;
+                background-attachment: fixed !important;
+            }
+        }
 
         /* Navigation */
         nav {
@@ -57,7 +68,7 @@
             box-shadow: none;
             border-bottom: none;
             z-index: 1000;
-            padding: 1rem 2rem;
+            padding: 1rem 0.5rem;
         }
 
         nav .nav-container {
@@ -66,6 +77,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
             flex-wrap: nowrap;
         }
 
@@ -96,9 +108,9 @@
             color: var(--text-secondary);
             font-weight: 500;
             transition: all 0.3s;
-            padding: 0.7rem 1.2rem;
+            padding: 0.5rem 0.9rem;
             border-radius: 8px;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
         }
 
         .nav-links a:hover {
@@ -117,10 +129,10 @@
             backdrop-filter: blur(10px);
             color: var(--text-light);
             border: 1px solid var(--glass-border);
-            padding: 0.7rem 1.2rem;
+            padding: 0.5rem 0.9rem;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
             display: flex;
             align-items: center;
@@ -197,14 +209,6 @@
             }
         }
 
-        /* Mobile background image */
-        @media screen and (max-width: 768px) {
-            body {
-                /* Для мобильной версии используется оптимизированное изображение */
-                background: url('./mobile 8k back web.jpg') center center / cover no-repeat fixed;
-            }
-        }
-        
         @media screen and (max-width: 768px) {
             .mobile-only {
                 display: flex !important;
@@ -545,12 +549,12 @@
             color: var(--text-secondary);
             font-weight: 500;
             transition: all 0.3s;
-            padding: 0.7rem 1.2rem;
+            padding: 0.5rem 0.9rem;
             border-radius: 8px;
             user-select: none;
             line-height: 1.4;
             vertical-align: middle;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
         }
 
         .nav-dropdown-toggle:hover {
@@ -629,7 +633,7 @@
         /* Responsive */
         @media (max-width: 1200px) {
             nav .nav-container {
-                padding: 0 1rem;
+                padding: 0 0.5rem;
             }
             
             .nav-links {
@@ -742,11 +746,12 @@
             }
 
             main {
-                margin-top: 80px !important;
+                margin-top: 40px !important;
             }
 
             .hero {
-                padding: 2rem 1rem !important;
+                padding: 1rem 1rem !important;
+                padding-top: 0.5rem !important;
             }
 
             .hero h1 {
@@ -756,6 +761,7 @@
             .hero p {
                 font-size: 1.2rem;
                 padding: 0 0.5rem;
+                margin-bottom: 10rem !important;
             }
 
             .hero .version {
@@ -818,11 +824,16 @@
             }
 
             main {
-                margin-top: 90px;
+                margin-top: 40px !important;
             }
 
             .hero {
-                padding: 3rem 0.75rem;
+                padding: 1rem 0.75rem !important;
+                padding-top: 0.5rem !important;
+            }
+            
+            .hero p {
+                margin-bottom: 10rem !important;
             }
 
             .hero h1 {
@@ -939,26 +950,6 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="nav-links-wrapper">
-                <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li class="desktop-link"><a href="#tutorial">📚 Tutorial</a></li>
-                <li class="desktop-link"><a href="#privacy">🔒 Privacy Policy</a></li>
-                <li class="nav-dropdown mobile-only">
-                    <span class="nav-dropdown-toggle">More</span>
-                    <div class="nav-dropdown-menu">
-                        <a href="#tutorial" class="nav-dropdown-item">
-                            <span class="nav-dropdown-icon">📚</span>
-                            <span>Tutorial</span>
-                        </a>
-                        <a href="#privacy" class="nav-dropdown-item">
-                            <span class="nav-dropdown-icon">🔒</span>
-                            <span>Privacy Policy</span>
-                        </a>
-                    </div>
-                </li>
-            </ul>
                 <div class="language-selector">
                     <button class="language-button" onclick="toggleLanguageMenu()">
                         <span id="current-lang-flag">🇬🇧</span>
@@ -979,6 +970,26 @@
                         </div>
                     </div>
                 </div>
+            <div class="nav-links-wrapper">
+                <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li class="desktop-link"><a href="#tutorial">📚 Tutorial</a></li>
+                <li class="desktop-link"><a href="#privacy">🔒 Privacy Policy</a></li>
+                <li class="nav-dropdown mobile-only">
+                    <span class="nav-dropdown-toggle">More</span>
+                    <div class="nav-dropdown-menu">
+                        <a href="#tutorial" class="nav-dropdown-item">
+                            <span class="nav-dropdown-icon">📚</span>
+                            <span>Tutorial</span>
+                        </a>
+                        <a href="#privacy" class="nav-dropdown-item">
+                            <span class="nav-dropdown-icon">🔒</span>
+                            <span>Privacy Policy</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
             </div>
         </div>
     </nav>
