@@ -465,6 +465,37 @@
         .card p[style*="font-size: 2rem"] {
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
+
+        /* Tutorial Steps */
+        .tutorial-step {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: all 0.3s;
+        }
+
+        .tutorial-step:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .tutorial-step h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-light);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .tutorial-step p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            white-space: pre-line;
+        }
     </style>
 </head>
 <body>
@@ -478,6 +509,7 @@
                 <li><a href="#features">Features</a></li>
                 <li><a href="#protocols">Protocols</a></li>
                 <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#tutorial">Tutorial</a></li>
                 <li><a href="#privacy">Privacy Policy</a></li>
             </ul>
             <div class="language-selector">
@@ -547,6 +579,12 @@
                     <p><strong>Dependency Injection:</strong> Hilt (Dagger)</p>
                     <p><strong>Network:</strong> Retrofit/OkHttp</p>
                     <p><strong>UI Framework:</strong> Jetpack Compose with Material Design 3</p>
+                </div>
+                <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--glass-border);">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--secondary-color);">📧 Contact Information</h3>
+                    <p><strong>Developer:</strong> Aleksandr Konstantinov (Instinct)</p>
+                    <p><strong>Email:</strong> <a href="mailto:instinctkotlincompose@gmail.com" style="color: var(--secondary-color); text-decoration: none;">instinctkotlincompose@gmail.com</a></p>
+                    <p><strong>Support:</strong> <a href="mailto:instinctkotlincompose@gmail.com?subject=InstinctShell%20-%20Help%20%26%20Support" style="color: var(--secondary-color); text-decoration: none;">Contact us</a></p>
                 </div>
             </div>
         </section>
@@ -755,6 +793,30 @@
             </div>
         </section>
 
+        <!-- Tutorial Section -->
+        <section id="tutorial" class="section">
+            <h2>🛡️ InstinctShell Tutorial</h2>
+            
+            <!-- Welcome Section -->
+            <div class="card" style="margin-bottom: 2rem;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--secondary-color);">Welcome to InstinctShell — your secure, flexible VPN manager.</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">Follow this quick guide to learn how to set up, manage, and optimize your connection.</p>
+            </div>
+
+            <!-- Tutorial Steps -->
+            <div id="tutorial-steps-container">
+                <!-- Steps will be dynamically inserted here by JavaScript -->
+            </div>
+
+            <!-- Pro Tips Section -->
+            <div class="card" style="margin-top: 2rem;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--secondary-color);">💡 Pro Tips</h3>
+                <div id="tutorial-pro-tips" style="color: var(--text-secondary); line-height: 1.8;">
+                    <!-- Pro tips will be dynamically inserted here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
         <!-- Privacy Policy Section -->
         <section id="privacy" class="section">
             <h2>🔒 Privacy Policy</h2>
@@ -938,7 +1000,13 @@
                     database: 'Database:',
                     di: 'Dependency Injection:',
                     network: 'Network:',
-                    uiFramework: 'UI Framework:'
+                    uiFramework: 'UI Framework:',
+                    contactInfo: '📧 Контактная информация',
+                    developer: 'Разработчик:',
+                    email: 'Email:',
+                    support: 'Поддержка:',
+                    contactUs: 'Связаться с нами',
+                    supportSubject: 'InstinctShell - Помощь и поддержка'
                 },
                 features: {
                     title: '🎯 Основные возможности',
@@ -1025,6 +1093,35 @@
                     title: '🌍 Локализация',
                     subtitle: 'Поддерживаемые языки (12)'
                 },
+                tutorial: {
+                    title: '🛡️ Руководство InstinctShell',
+                    welcomeTitle: 'Добро пожаловать в InstinctShell — ваш безопасный и гибкий VPN-менеджер.',
+                    welcomeDescription: 'Следуйте этому краткому руководству, чтобы узнать, как настроить, управлять и оптимизировать ваше соединение.',
+                    proTipsTitle: '💡 Полезные советы',
+                    proTips: '• Быстрое подключение – мгновенно переподключается к последнему или самому быстрому серверу\n• Пинг всех серверов – обновляйте пинг вручную в любое время\n• Автоподключение – оставайтесь защищёнными автоматически при запуске\n• Ручные серверы – идеально для приватных или тестовых сред\n• Индикаторы статуса – 🟥 Отключён | 🟩 Подключён | 🟧 Подключение\n• Организация папок – сворачивайте/разворачивайте подписки для ясности\n• Быстрое отключение – остановите VPN прямо из панели уведомлений\n\n✅ InstinctShell поддерживает ваше соединение быстрым, гибким и безопасным — с полным контролем в ваших руках.',
+                    steps: [
+                        { title: '🚀 1. Добавить VLESS подписку', desc: 'Нажмите "+" в верхней панели → выберите Импорт подписки → вставьте ссылку на вашу VLESS подписку.\nInstinctShell автоматически импортирует и обновит несколько серверов из этой ссылки — быстро и удобно.' },
+                        { title: '⚙️ 2. Добавить сервер вручную', desc: 'Хотите полный контроль? Выберите Добавить сервер вручную и введите:\n\n• Название сервера\n• Адрес\n• Порт\n• Конфигурацию VLESS\n\nИдеально для пользовательских или приватных настроек.' },
+                        { title: '🌍 3. Просмотреть список серверов', desc: 'Откройте Список серверов, чтобы увидеть все доступные серверы.\nИспользуйте строку поиска для быстрого поиска серверов.\nСерверы сгруппированы по подпискам и окрашены по качеству пинга:\n\n🟢 Отличный (≤ 50 мс)\n🟡 Хороший (51 – 100 мс)\n🟠 Удовлетворительный (101 – 200 мс)\n🔴 Плохой (> 200 мс)' },
+                        { title: '🔌 4. Подключиться к VPN', desc: 'Используйте Быстрое подключение для мгновенного подключения к последнему использованному или самому быстрому серверу.\nИли нажмите Подключиться на любом сервере из списка.\n✅ Значок щита станет зелёным при подключении.' },
+                        { title: '📶 5. Измерение пинга', desc: 'Пинг измеряется автоматически при загрузке списка серверов.\nНажмите "Пинг всех серверов" для ручного обновления.\nНиже пинг = быстрее подключение. Серверы окрашены для быстрого сравнения.' },
+                        { title: '🔐 6. Настройки безопасности', desc: 'Настройте DNS, таймауты подключения и раздельное туннелирование на вкладке Безопасность.\n(Только для продвинутых пользователей — настройки по умолчанию уже оптимизированы для большинства конфигураций.)' },
+                        { title: '⚙️ 7. Настройки приложения', desc: 'Настройте:\n\n• Тему и язык\n• Автоподключение\n• Параметры уведомлений\n• Управление подписками\n\nВсё это на вкладке Настройки.' },
+                        { title: '🎯 8. Умное исключение серверов', desc: 'Исключайте определенные серверы из Quick Connect для оптимальной производительности.\n\n💡 Зачем исключать серверы?\n• Вы в России → исключите RU серверы (использование локального VPN неэффективно)\n• Вы в Китае → исключите CN серверы\n• Низкая производительность → исключите медленные серверы\n\nУправление исключениями в Настройки → Исключенные серверы.\nQuick Connect автоматически пропустит исключенные серверы и выберет лучший доступный вариант!' },
+                        { title: '🔔 9. Расширенное управление уведомлениями', desc: 'Включите это в настройках для:\n\n• Подключения или отключения прямо из панели уведомлений\n• Постоянного уведомления для быстрого доступа и переподключения' },
+                        { title: '🌐 10. Поддержка RTL для арабского языка', desc: 'InstinctShell полностью поддерживает языки с письмом справа налево (RTL), такие как арабский. При выборе арабского языка интерфейс автоматически адаптируется к RTL-раскладке, предоставляя естественный опыт для арабских пользователей.' },
+                        { title: '⚡ 11. Функция автоподключения', desc: 'Включите автоподключение в настройках для автоматического подключения к вашему последнему серверу при запуске приложения. Это обеспечивает постоянную защиту без необходимости ручного вмешательства. Идеально подходит для пользователей, желающих бесшовной VPN-защиты.' },
+                        { title: '📜 12. Управление подписками', desc: 'Управляйте вашими VPN-подписками в настройках. Добавляйте несколько URL подписок, автоматически обновляйте списки серверов и организуйте подписки по именам. Подписки автоматически обновляют списки серверов и измерения пинга.' },
+                        { title: '🔄 13. Настройки пинга и производительности', desc: 'Настройте тестирование пинга в настройках для оптимизации использования батареи. Включайте/отключайте автоматический пинг, регулируйте продолжительность кеша и контролируйте время выполнения измерений пинга. Интеллектуальное кеширование снижает расход батареи при сохранении точных данных о производительности сервера.' },
+                        { title: '🧰 14. Обзор расширенных функций безопасности', desc: 'Изучите комплексные функции безопасности:\n\n• Критический переключатель - автоматическая блокировка интернета при отключении VPN\n• Скрытие позиции - изменение GPS координат в соответствии с сервером\n• Закрепление сертификатов - предотвращение MITM атак\n• Файрвол приложений - блокировка конкретных приложений' },
+                        { title: '🚨 15. Защита критического переключателя', desc: 'Критическая функция безопасности:\n\n• Автоматически блокирует ВЕСЬ интернет-трафик при отключении VPN\n• Предотвращает утечки данных и нарушение конфиденциальности\n• Необходима для максимальной безопасности\n\nВключите в расширенных настройках безопасности.' },
+                        { title: '🎭 16. Скрытие позиции', desc: 'Продвинутое изменение местоположения:\n\n• Изменяет GPS координаты в соответствии с местоположением VPN сервера\n• Обходит ограничения на основе местоположения\n• Избегает геоблокировки и региональных ограничений\n\nИдеально для доступа к контенту, заблокированному по регионам.' },
+                        { title: '📌 17. Закрепление сертификатов и обнаружение MITM', desc: 'Продвинутая сетевая безопасность:\n\n• Закрепление сертификатов - предотвращает атаки "человек посередине"\n• Обнаружение MITM - мониторинг угроз в реальном времени\n• Валидация сертификатов SHA-256\n• Защита от компрометации центров сертификации' },
+                        { title: '🔥 18. Файрвол приложений', desc: 'Продвинутый контроль сети на уровне приложений:\n\n• Блокирует конкретные приложения от доступа к сети\n• Мониторит статистику заблокированного трафика\n• Управление белыми/черными списками\n• Идеально для родительского контроля и ограничения использования данных' },
+                        { title: '⚙️ 19. Настройки оптимизации скорости', desc: 'Тонкая настройка производительности соединения:\n\n• Включите HTTP-трафик для более высоких скоростей\n• Пропустите проверку туннеля для более быстрых соединений\n• Настройте размер MTU и фрагментацию пакетов\n• Балансируйте скорость и безопасность в зависимости от ваших потребностей' },
+                        { title: '🧭 20. Расширенная маршрутизация и раздельное туннелирование', desc: 'Контроль маршрутизации для опытных пользователей:\n\n• Настройте стратегию доменов и правила обхода\n• Установите пользовательские DNS-серверы и размер MTU\n• Включите раздельное туннелирование для селективной маршрутизации\n• Тонкая настройка стабильности и производительности соединения' }
+                    ]
+                },
                 stats: {
                     title: '📈 Статистика проекта',
                     code: { title: '💻 Код', value: '50,000+', desc: 'строк кода' },
@@ -1044,6 +1141,7 @@
                     features: 'Features',
                     protocols: 'Protocols',
                     architecture: 'Architecture',
+                    tutorial: 'Tutorial',
                     privacy: 'Privacy Policy'
                 },
                 hero: {
@@ -1073,7 +1171,13 @@
                     database: 'Database:',
                     di: 'Dependency Injection:',
                     network: 'Network:',
-                    uiFramework: 'UI Framework:'
+                    uiFramework: 'UI Framework:',
+                    contactInfo: '📧 Contact Information',
+                    developer: 'Developer:',
+                    email: 'Email:',
+                    support: 'Support:',
+                    contactUs: 'Contact us',
+                    supportSubject: 'InstinctShell - Help & Support'
                 },
                 features: {
                     title: '🎯 Key Features',
@@ -1160,6 +1264,35 @@
                     title: '🌍 Localization',
                     subtitle: 'Supported Languages (12)'
                 },
+                tutorial: {
+                    title: '🛡️ InstinctShell Tutorial',
+                    welcomeTitle: 'Welcome to InstinctShell — your secure, flexible VPN manager.',
+                    welcomeDescription: 'Follow this quick guide to learn how to set up, manage, and optimize your connection.',
+                    proTipsTitle: '💡 Pro Tips',
+                    proTips: '• Quick Connect – instantly reconnects to your last or fastest server\n• Ping All Servers – refresh ping manually anytime\n• Auto-Connect – stay protected automatically at startup\n• Manual Servers – ideal for private or test environments\n• Status Indicators – 🟥 Disconnected | 🟩 Connected | 🟧 Connecting\n• Folder Organization – collapse/expand subscriptions for clarity\n• Quick Disconnect – stop VPN directly from the notification bar\n\n✅ InstinctShell keeps your connection fast, flexible, and secure — with full control in your hands.',
+                    steps: [
+                        { title: '🚀 1. Add VLESS Subscription', desc: 'Tap "+" in the top bar → choose Import Subscription → paste your VLESS subscription link.\nInstinctShell will automatically import and update multiple servers from that link — fast and convenient.' },
+                        { title: '⚙️ 2. Add Manual Server', desc: 'Want full control? Choose Add Server Manually and enter:\n\n• Server name\n• Address\n• Port\n• VLESS configuration\n\nIdeal for custom or private setups.' },
+                        { title: '🌍 3. Browse Server List', desc: 'Open Server List to see all available servers.\nUse the search bar to quickly find servers.\nServers are grouped by subscription and color-coded by ping quality:\n\n🟢 Excellent (≤ 50 ms)\n🟡 Good (51 – 100 ms)\n🟠 Fair (101 – 200 ms)\n🔴 Poor (> 200 ms)' },
+                        { title: '🔌 4. Connect to VPN', desc: 'Use Quick Connect for instant connection to your last used or fastest server.\nOr tap Connect on any listed server.\n✅ The shield icon turns green when connected.' },
+                        { title: '📶 5. Ping Measurement', desc: 'Ping is measured automatically when the server list loads.\nTap "Ping All Servers" to refresh manually.\nLower ping = faster connection. Servers are color-coded for quick comparison.' },
+                        { title: '🔐 6. Security Settings', desc: 'Configure DNS settings, connection timeouts, and split tunneling in the Security tab.\n(Advanced users only — defaults are already optimized for most setups.)' },
+                        { title: '⚙️ 7. App Settings', desc: 'Customize:\n\n• Theme and language\n• Auto-connect\n• Notification options\n• Subscription management\n\nAll in the Settings tab.' },
+                        { title: '🎯 8. Smart Server Exclusion', desc: 'Exclude specific servers from Quick Connect for optimal performance.\n\n💡 Why exclude servers?\n• You\'re in Russia → exclude RU servers (using local VPN is inefficient)\n• You\'re in China → exclude CN servers\n• Poor performance → exclude slow servers\n\nManage exclusions in Settings → Excluded Servers.\nQuick Connect will automatically skip excluded servers and choose the best available option!' },
+                        { title: '🔔 9. Advanced Notification Management', desc: 'Enable this in Settings to:\n\n• Connect or disconnect directly from the notification panel\n• Keep a persistent notification for quick access and reconnection' },
+                        { title: '🌐 10. RTL Support for Arabic', desc: 'InstinctShell fully supports Right-to-Left (RTL) languages like Arabic.\nThe UI automatically adapts for a natural experience.' },
+                        { title: '⚡ 11. Auto-Connect', desc: 'Enable Auto-Connect to automatically connect to your last used server at app startup.\nPerfect for seamless, hands-free protection.' },
+                        { title: '📜 12. Subscription Management', desc: 'Manage all your VPN subscriptions:\n\n• Add multiple subscription URLs\n• Refresh server lists automatically\n• Organize by name\n\nInstinctShell automatically updates server lists and ping data.' },
+                        { title: '🔄 13. Ping & Performance Settings', desc: 'In Settings, fine-tune ping behavior:\n\n• Enable or disable auto-ping\n• Adjust cache duration\n• Reduce battery usage with smart ping caching' },
+                        { title: '🧰 14. Advanced Security Overview', desc: 'Explore comprehensive security features:\n\n• Fatal Switch - Auto-block internet if VPN disconnects\n• Position Undercover - Change GPS to match server location\n• Certificate Pinning - Prevent MITM attacks\n• Application Firewall - Block specific apps from network' },
+                        { title: '🚨 15. Fatal Switch Protection', desc: 'Critical security feature:\n\n• Automatically blocks ALL internet traffic when VPN disconnects\n• Prevents data leaks and privacy exposure\n• Essential for maximum security\n\nEnable in Advanced Security settings.' },
+                        { title: '🎭 16. Position Undercover', desc: 'Advanced location spoofing:\n\n• Changes GPS coordinates to match VPN server location\n• Bypasses location-based restrictions\n• Evades geo-blocking and regional limitations\n\nPerfect for accessing region-locked content.' },
+                        { title: '📌 17. Certificate Pinning & MITM Detection', desc: 'Advanced network security:\n\n• Certificate Pinning - Prevents man-in-the-middle attacks\n• MITM Detection - Real-time threat monitoring\n• SHA-256 certificate validation\n• Protects against compromised certificate authorities' },
+                        { title: '🔥 18. Application Firewall', desc: 'Advanced app-level network control:\n\n• Block specific applications from network access\n• Monitor blocked traffic statistics\n• Whitelist/blacklist management\n• Perfect for parental control and data usage limits' },
+                        { title: '⚙️ 19. Speed Optimization Settings', desc: 'Fine-tune connection performance:\n\n• Enable HTTP traffic for faster speeds\n• Skip tunnel validation for quicker connections\n• Adjust MTU size and packet fragmentation\n• Balance speed vs security based on your needs' },
+                        { title: '🧭 20. Advanced Routing & Split Tunneling', desc: 'Power user routing control:\n\n• Configure domain strategy and bypass rules\n• Set custom DNS servers and MTU size\n• Enable split tunneling for selective routing\n• Fine-tune connection stability and performance' }
+                    ]
+                },
                 stats: {
                     title: '📈 Project Statistics',
                     code: { title: '💻 Code', value: '50,000+', desc: 'lines of code' },
@@ -1179,6 +1312,7 @@
                     features: '功能',
                     protocols: '协议',
                     architecture: '架构',
+                    tutorial: '教程',
                     privacy: '隐私政策'
                 },
                 hero: {
@@ -1208,7 +1342,13 @@
                     database: 'Database:',
                     di: 'Dependency Injection:',
                     network: 'Network:',
-                    uiFramework: 'UI Framework:'
+                    uiFramework: 'UI Framework:',
+                    contactInfo: '📧 联系信息',
+                    developer: '开发者:',
+                    email: 'Email:',
+                    support: '支持:',
+                    contactUs: '联系我们',
+                    supportSubject: 'InstinctShell - 帮助和支持'
                 },
                 features: {
                     title: '🎯 主要功能',
@@ -1294,6 +1434,35 @@
                 localization: {
                     title: '🌍 本地化',
                     subtitle: '支持的语言 (12)'
+                },
+                tutorial: {
+                    title: '🛡️ InstinctShell 教程',
+                    welcomeTitle: '欢迎使用 InstinctShell — 您的安全、灵活的 VPN 管理器。',
+                    welcomeDescription: '按照本快速指南学习如何设置、管理和优化您的连接。',
+                    proTipsTitle: '💡 专业提示',
+                    proTips: '• 快速连接 – 立即重新连接到您最后使用或最快的服务器\n• 对所有服务器进行 Ping – 随时手动刷新 ping\n• 自动连接 – 在启动时自动保持保护\n• 手动服务器 – 适合私有或测试环境\n• 状态指示器 – 🟥 已断开 | 🟩 已连接 | 🟧 正在连接\n• 文件夹组织 – 折叠/展开订阅以清晰显示\n• 快速断开 – 直接从通知栏停止 VPN\n\n✅ InstinctShell 保持您的连接快速、灵活和安全 — 完全由您掌控。',
+                    steps: [
+                        { title: '🚀 1. 添加 VLESS 订阅', desc: '点击顶部栏的"+" → 选择导入订阅 → 粘贴您的 VLESS 订阅链接。\nInstinctShell 将自动从此链接导入和更新多个服务器 — 快速便捷。' },
+                        { title: '⚙️ 2. 添加手动服务器', desc: '想要完全控制？选择手动添加服务器并输入：\n\n• 服务器名称\n• 地址\n• 端口\n• VLESS 配置\n\n适合自定义或私有设置。' },
+                        { title: '🌍 3. 浏览服务器列表', desc: '打开服务器列表以查看所有可用服务器。\n使用搜索栏快速查找服务器。\n服务器按订阅分组，并按 ping 质量进行颜色编码：\n\n🟢 优秀 (≤ 50 ms)\n🟡 良好 (51 – 100 ms)\n🟠 一般 (101 – 200 ms)\n🔴 较差 (> 200 ms)' },
+                        { title: '🔌 4. 连接到 VPN', desc: '使用快速连接立即连接到您最后使用或最快的服务器。\n或点击任何列出的服务器上的连接。\n✅ 连接后，盾牌图标变为绿色。' },
+                        { title: '📶 5. Ping 测量', desc: '加载服务器列表时会自动测量 ping。\n点击"对所有服务器进行 Ping"以手动刷新。\n较低的 ping = 更快的连接。服务器进行颜色编码以便快速比较。' },
+                        { title: '🔐 6. 安全设置', desc: '在安全选项卡中配置 DNS 设置、连接超时和分流隧道。\n（仅限高级用户 — 默认值已针对大多数设置进行了优化。）' },
+                        { title: '⚙️ 7. 应用设置', desc: '自定义：\n\n• 主题和语言\n• 自动连接\n• 通知选项\n• 订阅管理\n\n全部在设置选项卡中。' },
+                        { title: '🎯 8. 智能服务器排除', desc: '从快速连接中排除特定服务器以获得最佳性能。\n\n💡 为什么要排除服务器？\n• 您在俄罗斯 → 排除 RU 服务器（使用本地 VPN 效率低下）\n• 您在中国 → 排除 CN 服务器\n• 性能差 → 排除慢速服务器\n\n在设置 → 排除的服务器中管理排除。\n快速连接将自动跳过排除的服务器并选择最佳可用选项！' },
+                        { title: '🔔 9. 高级通知管理', desc: '在设置中启用此功能：\n\n• 直接从通知面板连接或断开连接\n• 保持持久通知以便快速访问和重新连接' },
+                        { title: '🌐 10. 阿拉伯语 RTL 支持', desc: 'InstinctShell 完全支持从右到左 (RTL) 语言，如阿拉伯语。\nUI 会自动适应以获得自然体验。' },
+                        { title: '⚡ 11. 自动连接', desc: '启用自动连接以在应用启动时自动连接到您最后使用的服务器。\n非常适合无缝、免提保护。' },
+                        { title: '📜 12. 订阅管理', desc: '管理您的所有 VPN 订阅：\n\n• 添加多个订阅 URL\n• 自动刷新服务器列表\n• 按名称组织\n\nInstinctShell 自动更新服务器列表和 ping 数据。' },
+                        { title: '🔄 13. Ping 和性能设置', desc: '在设置中，微调 ping 行为：\n\n• 启用或禁用自动 ping\n• 调整缓存持续时间\n• 通过智能 ping 缓存减少电池使用' },
+                        { title: '🧰 14. 高级安全概述', desc: '探索全面的安全功能：\n\n• 致命开关 - 如果 VPN 断开，自动阻止互联网\n• 位置伪装 - 更改 GPS 以匹配服务器位置\n• 证书固定 - 防止 MITM 攻击\n• 应用程序防火墙 - 阻止特定应用访问网络' },
+                        { title: '🚨 15. 致命开关保护', desc: '关键安全功能：\n\n• 当 VPN 断开时自动阻止所有互联网流量\n• 防止数据泄漏和隐私暴露\n• 最大安全性所必需\n\n在高级安全设置中启用。' },
+                        { title: '🎭 16. 位置伪装', desc: '高级位置欺骗：\n\n• 更改 GPS 坐标以匹配 VPN 服务器位置\n• 绕过基于位置的限制\n• 逃避地理封锁和区域限制\n\n非常适合访问区域锁定内容。' },
+                        { title: '📌 17. 证书固定和 MITM 检测', desc: '高级网络安全：\n\n• 证书固定 - 防止中间人攻击\n• MITM 检测 - 实时威胁监控\n• SHA-256 证书验证\n• 防止受损的证书颁发机构' },
+                        { title: '🔥 18. 应用程序防火墙', desc: '高级应用级网络控制：\n\n• 阻止特定应用访问网络\n• 监控被阻止的流量统计\n• 白名单/黑名单管理\n• 非常适合家长控制和数据使用限制' },
+                        { title: '⚙️ 19. 速度优化设置', desc: '微调连接性能：\n\n• 启用 HTTP 流量以获得更快的速度\n• 跳过隧道验证以加快连接\n• 调整 MTU 大小和数据包分段\n• 根据您的需求平衡速度与安全性' },
+                        { title: '🧭 20. 高级路由和分流隧道', desc: '高级用户路由控制：\n\n• 配置域策略和绕过规则\n• 设置自定义 DNS 服务器和 MTU 大小\n• 启用分流隧道以进行选择性路由\n• 微调连接稳定性和性能' }
+                    ]
                 },
                 stats: {
                     title: '📈 项目统计',
@@ -1411,6 +1580,12 @@
                         <p><strong>${t.about.network}</strong> Retrofit/OkHttp</p>
                         <p><strong>${t.about.uiFramework}</strong> Jetpack Compose with Material Design 3</p>
                     </div>
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--glass-border);">
+                        <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--secondary-color);">${t.about.contactInfo}</h3>
+                        <p><strong>${t.about.developer}</strong> Aleksandr Konstantinov (Instinct)</p>
+                        <p><strong>${t.about.email}</strong> <a href="mailto:instinctkotlincompose@gmail.com" style="color: var(--secondary-color); text-decoration: none;">instinctkotlincompose@gmail.com</a></p>
+                        <p><strong>${t.about.support}</strong> <a href="mailto:instinctkotlincompose@gmail.com?subject=${encodeURIComponent(t.about.supportSubject)}" style="color: var(--secondary-color); text-decoration: none;">${t.about.contactUs}</a></p>
+                    </div>
                 `;
             }
 
@@ -1523,6 +1698,43 @@
             const locH3 = document.querySelector('#localization h3');
             if (locH2) locH2.textContent = t.localization.title;
             if (locH3) locH3.textContent = t.localization.subtitle;
+
+            // Update tutorial section
+            const tutorialH2 = document.querySelector('#tutorial h2');
+            const tutorialWelcomeCard = document.querySelector('#tutorial .card');
+            const tutorialStepsContainer = document.getElementById('tutorial-steps-container');
+            const tutorialProTips = document.getElementById('tutorial-pro-tips');
+            
+            if (tutorialH2) tutorialH2.textContent = t.tutorial.title;
+            
+            if (tutorialWelcomeCard) {
+                const welcomeH3 = tutorialWelcomeCard.querySelector('h3');
+                const welcomeP = tutorialWelcomeCard.querySelector('p');
+                if (welcomeH3) welcomeH3.textContent = t.tutorial.welcomeTitle;
+                if (welcomeP) welcomeP.textContent = t.tutorial.welcomeDescription;
+            }
+            
+            if (tutorialStepsContainer && t.tutorial.steps) {
+                tutorialStepsContainer.innerHTML = '';
+                t.tutorial.steps.forEach(step => {
+                    const stepDiv = document.createElement('div');
+                    stepDiv.className = 'tutorial-step';
+                    stepDiv.innerHTML = `
+                        <h4>${step.title}</h4>
+                        <p>${step.desc}</p>
+                    `;
+                    tutorialStepsContainer.appendChild(stepDiv);
+                });
+            }
+            
+            if (tutorialProTips) {
+                const proTipsCard = tutorialProTips.closest('.card');
+                if (proTipsCard) {
+                    const proTipsH3 = proTipsCard.querySelector('h3');
+                    if (proTipsH3) proTipsH3.textContent = t.tutorial.proTipsTitle;
+                }
+                tutorialProTips.textContent = t.tutorial.proTips;
+            }
 
             // Update stats section
             const statsH2 = document.querySelector('#stats h2');
