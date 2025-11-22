@@ -239,6 +239,14 @@
             color: var(--text-light);
         }
 
+        .hero .version:first-of-type {
+            margin-top: 0;
+        }
+
+        .hero .version:not(:first-of-type) {
+            margin-top: 1rem;
+        }
+
         .hero .version:hover {
             background: rgba(255, 255, 255, 0.15);
             border-color: var(--secondary-color);
@@ -889,21 +897,6 @@
                         </a>
                     </div>
                 </li>
-                <li class="nav-dropdown">
-                    <span class="nav-dropdown-toggle">Actions</span>
-                    <div class="nav-dropdown-menu">
-                        <a href="https://t.me/instinct_kotlin" target="_blank" rel="noopener noreferrer" class="nav-dropdown-item" id="telegram-link">
-                            <span class="nav-dropdown-icon">✈️</span>
-                            <span id="telegram-text">Telegram</span>
-                        </a>
-                        <a href="#" class="nav-dropdown-item" id="download-link" onclick="event.preventDefault(); alert('Download link will be available soon!');">
-                            <span class="nav-dropdown-icon">
-                                <span class="download-icon"></span>
-                            </span>
-                            <span id="download-text">Download</span>
-                        </a>
-                    </div>
-                </li>
             </ul>
                 <div class="language-selector">
                     <button class="language-button" onclick="toggleLanguageMenu()">
@@ -935,6 +928,7 @@
         <section id="home" class="hero">
             <h1>InstinctShell</h1>
             <p>VPN Subscription Management Application</p>
+            <a href="https://t.me/instinct_kotlin" target="_blank" rel="noopener noreferrer" class="version" id="telegram-hero-btn">✈️ Telegram</a>
             <a href="#" class="version" id="download-version-btn" onclick="event.preventDefault(); alert('Download link will be available soon!');">Download Version 1.9.7 | Android 7.0+ | API 24-35</a>
         </section>
 
@@ -1366,7 +1360,7 @@
                     features: 'Возможности',
                     protocols: 'Протоколы',
                     architecture: 'Архитектура',
-                    privacy: 'Privacy Policy'
+                    privacy: 'Политика конфиденциальности'
                 },
                 sidebar: {
                     telegram: 'Telegram',
@@ -1374,7 +1368,7 @@
                 },
                 hero: {
                     title: 'InstinctShell',
-                    subtitle: 'VPN Subscription Management Application',
+                    subtitle: 'Приложение для управления VPN-подписками',
                     version: 'Скачать Версия 1.9.7 | Android 7.0+ | API 24-35'
                 },
                 about: {
@@ -1482,12 +1476,12 @@
                 },
                 screens: {
                     title: '📱 Структура экранов',
-                    home: { title: 'Home Screen', desc: 'Статус подключения, быстрые действия' },
-                    serverList: { title: 'Server List', desc: 'Список серверов, поиск, фильтрация' },
-                    serverDetails: { title: 'Server Details', desc: 'Детали сервера, редактирование' },
-                    settings: { title: 'Settings', desc: 'Настройки приложения и VPN' },
-                    profile: { title: 'Profile', desc: 'Профили безопасности' },
-                    tutorial: { title: 'Tutorial', desc: 'Руководство по использованию' }
+                    home: { title: 'Главный экран', desc: 'Статус подключения, быстрые действия' },
+                    serverList: { title: 'Список серверов', desc: 'Список серверов, поиск, фильтрация' },
+                    serverDetails: { title: 'Детали сервера', desc: 'Детали сервера, редактирование' },
+                    settings: { title: 'Настройки', desc: 'Настройки приложения и VPN' },
+                    profile: { title: 'Профиль', desc: 'Профили безопасности' },
+                    tutorial: { title: 'Руководство', desc: 'Руководство по использованию' }
                 },
                 localization: {
                     title: '🌍 Локализация',
@@ -1973,11 +1967,9 @@
             
             // Update dropdown toggles
             const dropdowns = document.querySelectorAll('.nav-dropdown');
-            if (dropdowns.length >= 2) {
+            if (dropdowns.length >= 1) {
                 const moreToggle = dropdowns[0].querySelector('.nav-dropdown-toggle');
-                const actionsToggle = dropdowns[1].querySelector('.nav-dropdown-toggle');
                 if (moreToggle) moreToggle.textContent = t.nav.more;
-                if (actionsToggle) actionsToggle.textContent = t.nav.actions;
             }
             
             // Update dropdown items in "More" menu
@@ -1989,17 +1981,21 @@
                 moreMenuItems[3].innerHTML = `<span class="nav-dropdown-icon">📚</span><span>${t.nav.tutorial}</span>`;
                 moreMenuItems[4].innerHTML = `<span class="nav-dropdown-icon">🔒</span><span>${t.nav.privacy}</span>`;
             }
+
+            // Update Privacy Policy section
+            const privacyH2 = document.querySelector('#privacy h2');
+            if (privacyH2) privacyH2.textContent = `🔒 ${t.nav.privacy}`;
             
-            // Update dropdown items in "Actions" menu
-            const telegramText = document.getElementById('telegram-text');
-            const downloadText = document.getElementById('download-text');
-            if (telegramText && t.sidebar) telegramText.textContent = t.sidebar.telegram;
-            if (downloadText && t.sidebar) downloadText.textContent = t.sidebar.download;
+            // Update Telegram button in hero
+            const telegramHeroBtn = document.getElementById('telegram-hero-btn');
+            if (telegramHeroBtn && t.sidebar) {
+                telegramHeroBtn.innerHTML = `✈️ ${t.sidebar.telegram}`;
+            }
 
             // Update hero section
             const heroH1 = document.querySelector('.hero h1');
             const heroP = document.querySelector('.hero p');
-            const heroVersion = document.querySelector('.hero .version');
+            const heroVersion = document.querySelector('#download-version-btn');
             if (heroH1) heroH1.textContent = t.hero.title;
             if (heroP) heroP.textContent = t.hero.subtitle;
             if (heroVersion) heroVersion.textContent = t.hero.version;
