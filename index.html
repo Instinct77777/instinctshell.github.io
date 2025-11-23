@@ -713,6 +713,12 @@
                 display: flex !important;
                 align-items: center !important;
                 margin: 0 !important;
+                position: relative !important;
+                overflow: visible !important;
+            }
+            
+            .nav-links li.nav-dropdown {
+                overflow: visible !important;
             }
 
             .nav-links li.mobile-hide {
@@ -829,20 +835,36 @@
                 color: var(--text-secondary) !important;
             }
 
+            .nav-dropdown.mobile-only {
+                position: relative !important;
+            }
+            
             .nav-dropdown.mobile-only .nav-dropdown-menu {
                 left: 0 !important;
                 right: auto !important;
                 min-width: 160px !important;
                 z-index: 1005 !important;
                 position: absolute !important;
+                top: 100% !important;
+                margin-top: 0.5rem !important;
                 visibility: visible !important;
                 opacity: 1 !important;
+                transform: none !important;
             }
             
             .nav-dropdown.mobile-only.active .nav-dropdown-menu {
                 display: block !important;
                 visibility: visible !important;
                 opacity: 1 !important;
+                transform: none !important;
+            }
+            
+            .nav-links-wrapper {
+                overflow: visible !important;
+            }
+            
+            .nav-links {
+                overflow: visible !important;
             }
 
             .mobile-only {
@@ -1012,20 +1034,36 @@
                 color: var(--text-secondary) !important;
             }
 
+            .nav-dropdown.mobile-only {
+                position: relative !important;
+            }
+            
             .nav-dropdown.mobile-only .nav-dropdown-menu {
                 left: 0 !important;
                 right: auto !important;
                 min-width: 160px !important;
                 z-index: 1005 !important;
                 position: absolute !important;
+                top: 100% !important;
+                margin-top: 0.5rem !important;
                 visibility: visible !important;
                 opacity: 1 !important;
+                transform: none !important;
             }
             
             .nav-dropdown.mobile-only.active .nav-dropdown-menu {
                 display: block !important;
                 visibility: visible !important;
                 opacity: 1 !important;
+                transform: none !important;
+            }
+            
+            .nav-links-wrapper {
+                overflow: visible !important;
+            }
+            
+            .nav-links {
+                overflow: visible !important;
             }
 
             .mobile-only {
@@ -2358,9 +2396,8 @@
             changeLanguage(currentLanguage, false);
             
             // Toggle dropdown menus
-            // Close dropdowns when clicking outside or on a link
-            let dropdownJustOpened = false;
-            let lastToggleTime = 0;
+            let activeDropdown = null;
+            let isToggling = false;
             
             function setupDropdownToggle(toggle) {
                 // Make sure button is clickable on mobile
@@ -2380,57 +2417,42 @@
                         e.stopImmediatePropagation();
                     }
                     
-                    const currentTime = Date.now();
-                    
-                    // Prevent double-tap issues
-                    if (currentTime - lastToggleTime < 250) {
+                    // Prevent rapid clicks
+                    if (isToggling) {
                         return;
                     }
-                    lastToggleTime = currentTime;
+                    isToggling = true;
+                    setTimeout(() => { isToggling = false; }, 300);
                     
                     const isActive = dropdown.classList.contains('active');
                     
-                    // Set flag immediately to prevent outside click handler from closing
-                    dropdownJustOpened = true;
-                    
-                    // Close all dropdowns first
+                    // Close all other dropdowns
                     document.querySelectorAll('.nav-dropdown').forEach(d => {
-                        if (d !== dropdown) d.classList.remove('active');
+                        if (d !== dropdown) {
+                            d.classList.remove('active');
+                        }
                     });
                     
                     // Toggle current dropdown
                     if (isActive) {
                         dropdown.classList.remove('active');
-                        dropdownJustOpened = false;
+                        activeDropdown = null;
                     } else {
                         dropdown.classList.add('active');
-                        // Keep flag true longer for mobile
-                        setTimeout(() => {
-                            dropdownJustOpened = false;
-                        }, 800);
+                        activeDropdown = dropdown;
                     }
                 };
                 
-                // Handle both click and touch events
-                let touchStartTime = 0;
-                
+                // Use touchstart for immediate response on mobile
                 toggle.addEventListener('touchstart', function(e) {
-                    touchStartTime = Date.now();
                     e.stopPropagation();
-                }, { passive: true });
-                
-                toggle.addEventListener('touchend', function(e) {
-                    const touchDuration = Date.now() - touchStartTime;
-                    // Only handle if it was a quick tap (not a swipe)
-                    if (touchDuration < 300) {
-                        handleToggle(e);
-                    }
+                    handleToggle(e);
                 }, { passive: false });
                 
+                // Also handle click for desktop and as fallback
                 toggle.addEventListener('click', function(e) {
-                    // Only handle click if it wasn't already handled by touch
-                    const timeSinceTouch = Date.now() - lastToggleTime;
-                    if (timeSinceTouch > 300) {
+                    // Only handle if not already handled by touch
+                    if (!e.defaultPrevented) {
                         handleToggle(e);
                     }
                 }, false);
@@ -2443,7 +2465,6 @@
             // Special handling for mobile-only dropdown
             const mobileMoreToggle = document.querySelector('.nav-dropdown.mobile-only .nav-dropdown-toggle');
             if (mobileMoreToggle) {
-                // Ensure it's properly set up
                 mobileMoreToggle.style.pointerEvents = 'auto';
                 mobileMoreToggle.style.touchAction = 'manipulation';
                 mobileMoreToggle.style.cursor = 'pointer';
@@ -2451,38 +2472,60 @@
                 mobileMoreToggle.style.userSelect = 'none';
             }
             
-            // Handle clicks outside dropdown
-            function handleOutsideClick(event) {
-                // Give toggle handler time to set the flag
-                setTimeout(() => {
-                    if (dropdownJustOpened) {
-                        return;
-                    }
-                    
-                    const clickedDropdown = event.target.closest('.nav-dropdown');
-                    const clickedToggle = event.target.closest('.nav-dropdown-toggle');
-                    
-                    // Don't close if clicking the toggle
-                    if (clickedToggle) {
-                        return;
-                    }
-                    
-                    if (!clickedDropdown) {
-                        // Clicked outside, close all dropdowns
-                        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
-                    } else if (event.target.closest('.nav-dropdown-item')) {
-                        // Clicked on a dropdown item, close dropdown after a short delay
-                        setTimeout(() => {
-                            clickedDropdown.classList.remove('active');
-                        }, 150);
-                    }
-                }, 100);
-            }
+            // Handle clicks/touches outside dropdown - use capture phase and delay
+            document.addEventListener('click', function(event) {
+                // Use requestAnimationFrame to ensure toggle handler runs first
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        const clickedDropdown = event.target.closest('.nav-dropdown');
+                        const clickedToggle = event.target.closest('.nav-dropdown-toggle');
+                        
+                        // Don't close if clicking the toggle or inside dropdown
+                        if (clickedToggle || (clickedDropdown && clickedDropdown === activeDropdown)) {
+                            return;
+                        }
+                        
+                        // Close if clicking outside
+                        if (!clickedDropdown) {
+                            document.querySelectorAll('.nav-dropdown').forEach(d => {
+                                d.classList.remove('active');
+                            });
+                            activeDropdown = null;
+                        } else if (event.target.closest('.nav-dropdown-item')) {
+                            // Clicked on a dropdown item, close after delay
+                            setTimeout(() => {
+                                clickedDropdown.classList.remove('active');
+                                if (activeDropdown === clickedDropdown) {
+                                    activeDropdown = null;
+                                }
+                            }, 200);
+                        }
+                    }, 50);
+                });
+            }, true);
             
-            document.addEventListener('click', handleOutsideClick, false);
+            // Handle touch events outside - with longer delay for mobile
             document.addEventListener('touchend', function(event) {
-                handleOutsideClick(event);
-            }, { passive: true });
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        const clickedDropdown = event.target.closest('.nav-dropdown');
+                        const clickedToggle = event.target.closest('.nav-dropdown-toggle');
+                        
+                        // Don't close if touching the toggle or inside dropdown
+                        if (clickedToggle || (clickedDropdown && clickedDropdown === activeDropdown)) {
+                            return;
+                        }
+                        
+                        // Close if touching outside
+                        if (!clickedDropdown) {
+                            document.querySelectorAll('.nav-dropdown').forEach(d => {
+                                d.classList.remove('active');
+                            });
+                            activeDropdown = null;
+                        }
+                    }, 150);
+                });
+            }, { passive: true, capture: true });
 
         });
 
