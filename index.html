@@ -814,6 +814,8 @@
                 background: transparent !important;
                 backdrop-filter: none !important;
                 color: var(--text-secondary) !important;
+                padding: 0.35rem 0.5rem !important;
+                font-size: 0.85rem !important;
             }
 
             .nav-dropdown.mobile-only .nav-dropdown-toggle:hover,
@@ -974,6 +976,8 @@
                 background: transparent !important;
                 backdrop-filter: none !important;
                 color: var(--text-secondary) !important;
+                padding: 0.35rem 0.5rem !important;
+                font-size: 0.85rem !important;
             }
 
             .nav-dropdown.mobile-only .nav-dropdown-toggle:hover,
@@ -1173,11 +1177,12 @@
             <div class="nav-links-wrapper">
                 <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#" onclick="event.preventDefault();">Donate</a></li>
                 <li><a href="#about">About</a></li>
                 <li class="mobile-hide"><a href="#tutorial">📚 Tutorial</a></li>
                 <li class="mobile-hide"><a href="#privacy">🔒 Privacy Policy</a></li>
                 <li class="nav-dropdown mobile-only">
-                    <button class="nav-dropdown-toggle" type="button">⋯ More</button>
+                    <button class="nav-dropdown-toggle" type="button">More</button>
                     <div class="nav-dropdown-menu">
                         <a class="nav-dropdown-item" href="#tutorial">📚 Tutorial</a>
                         <a class="nav-dropdown-item" href="#privacy">🔒 Privacy Policy</a>
@@ -2311,10 +2316,18 @@
             changeLanguage(currentLanguage, false);
             
             // Toggle dropdown menus
+            // Close dropdowns when clicking outside or on a link
+            let dropdownJustOpened = false;
+            
             document.querySelectorAll('.nav-dropdown-toggle').forEach(toggle => {
-                toggle.addEventListener('click', function(e) {
+                // Make sure button is clickable on mobile
+                toggle.style.pointerEvents = 'auto';
+                toggle.style.touchAction = 'manipulation';
+                
+                const handleToggle = (e) => {
+                    e.preventDefault();
                     e.stopPropagation();
-                    const dropdown = this.parentElement;
+                    const dropdown = toggle.parentElement;
                     const isActive = dropdown.classList.contains('active');
                     
                     // Close all dropdowns
@@ -2323,13 +2336,34 @@
                     // Toggle current dropdown
                     if (!isActive) {
                         dropdown.classList.add('active');
+                        dropdownJustOpened = true;
+                        setTimeout(() => {
+                            dropdownJustOpened = false;
+                        }, 300);
                     }
-                });
+                };
+                
+                // Add click handler
+                toggle.addEventListener('click', handleToggle);
+                
+                // Add touch handler for mobile
+                toggle.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleToggle(e);
+                }, { passive: false });
             });
-
-            // Close dropdowns when clicking outside or on a link
+            
             document.addEventListener('click', function(event) {
                 const clickedDropdown = event.target.closest('.nav-dropdown');
+                const clickedToggle = event.target.closest('.nav-dropdown-toggle');
+                
+                // Don't close if menu was just opened
+                if (dropdownJustOpened && clickedToggle) {
+                    dropdownJustOpened = false;
+                    return;
+                }
+                
                 if (!clickedDropdown) {
                     // Clicked outside, close all dropdowns
                     document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
@@ -2340,6 +2374,23 @@
                     }, 100);
                 }
             });
+            
+            // Also handle touch events for mobile
+            document.addEventListener('touchend', function(event) {
+                const clickedDropdown = event.target.closest('.nav-dropdown');
+                const clickedToggle = event.target.closest('.nav-dropdown-toggle');
+                
+                // Don't close if menu was just opened
+                if (dropdownJustOpened && clickedToggle) {
+                    dropdownJustOpened = false;
+                    return;
+                }
+                
+                if (!clickedDropdown) {
+                    // Touched outside, close all dropdowns
+                    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('active'));
+                }
+            }, { passive: true });
 
         });
 
@@ -2722,17 +2773,23 @@
                     const extraGap = window.innerWidth <= 768 ? 6 : 10;
                     let scrollTarget = target;
 
+                    // For all sections except home, find inner anchor
                     if (targetId !== '#home') {
                         const innerAnchor = target.querySelector('h1, h2, h3, .section-title, .card, .privacy-section');
                         if (innerAnchor) {
                             scrollTarget = innerAnchor;
                         }
+                    } else {
+                        // For home, use the h1 element
+                        const homeH1 = target.querySelector('h1');
+                        if (homeH1) {
+                            scrollTarget = homeH1;
+                        }
                     }
 
                     let targetPosition = scrollTarget.getBoundingClientRect().top + window.pageYOffset;
-                    if (targetId !== '#home') {
-                        targetPosition -= (navHeight + extraGap);
-                    }
+                    // Apply offset for all sections including home
+                    targetPosition -= (navHeight + extraGap);
 
                     window.scrollTo({
                         top: Math.max(0, targetPosition),
