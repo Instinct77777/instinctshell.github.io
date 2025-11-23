@@ -792,7 +792,7 @@
 
             .hero {
                 padding: 1rem 1rem !important;
-                padding-top: 3rem !important;
+                padding-top: 1.5rem !important;
             }
 
             .hero h1 {
@@ -803,12 +803,28 @@
             .hero p {
                 font-size: 1.2rem;
                 padding: 0 0.5rem;
-                margin-bottom: 2rem !important;
+                margin-bottom: 8rem !important;
             }
 
             .hero .version {
                 font-size: 0.85rem;
                 padding: 0.6rem 1.2rem;
+            }
+
+            .hero .version:first-of-type {
+                margin-top: 0 !important;
+            }
+
+            .privacy-section {
+                padding: 1.5rem !important;
+            }
+
+            .privacy-section p,
+            .privacy-section ul,
+            .privacy-section h3 {
+                color: var(--text-secondary) !important;
+                opacity: 1 !important;
+                visibility: visible !important;
             }
         }
 
@@ -878,7 +894,7 @@
 
             .hero {
                 padding: 1rem 0.75rem !important;
-                padding-top: 3rem !important;
+                padding-top: 1.5rem !important;
             }
             
             .hero h1 {
@@ -890,7 +906,7 @@
                 font-size: 1rem;
                 padding: 0 0.25rem;
                 line-height: 1.4;
-                margin-bottom: 2rem !important;
+                margin-bottom: 8rem !important;
             }
 
             .hero .version {
@@ -899,6 +915,22 @@
                 display: block;
                 margin: 1rem auto 0;
                 max-width: 90%;
+            }
+
+            .hero .version:first-of-type {
+                margin-top: 0 !important;
+            }
+
+            .privacy-section {
+                padding: 1rem !important;
+            }
+
+            .privacy-section p,
+            .privacy-section ul,
+            .privacy-section h3 {
+                color: var(--text-secondary) !important;
+                opacity: 1 !important;
+                visibility: visible !important;
             }
         }
 
@@ -2184,11 +2216,27 @@
             // Add event listener for language button (better mobile support)
             const langButton = document.querySelector('.language-button');
             if (langButton) {
-                langButton.addEventListener('click', function(e) {
+                // Remove onclick handler to avoid conflicts
+                langButton.removeAttribute('onclick');
+                
+                let touchStartTime = 0;
+                
+                langButton.addEventListener('touchstart', function(e) {
+                    touchStartTime = Date.now();
                     e.stopPropagation();
-                    toggleLanguageMenu(e);
-                });
+                }, { passive: true });
+                
                 langButton.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const touchDuration = Date.now() - touchStartTime;
+                    // Only trigger if it was a quick tap (not a swipe)
+                    if (touchDuration < 300) {
+                        toggleLanguageMenu(e);
+                    }
+                });
+                
+                langButton.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     toggleLanguageMenu(e);
@@ -2196,22 +2244,59 @@
             }
         });
 
+        // Close language menu when clicking outside
+        let languageMenuJustOpened = false;
+
         // Toggle language menu
         function toggleLanguageMenu(e) {
             if (e) {
                 e.stopPropagation();
+                e.preventDefault();
             }
             const dropdown = document.getElementById('languageDropdown');
+            const isShowing = dropdown.classList.contains('show');
             dropdown.classList.toggle('show');
+            
+            // Set flag to prevent immediate closing
+            if (!isShowing) {
+                languageMenuJustOpened = true;
+                setTimeout(() => {
+                    languageMenuJustOpened = false;
+                }, 200);
+            }
         }
-
-        // Close language menu when clicking outside
+        
         document.addEventListener('click', function(event) {
             const selector = document.querySelector('.language-selector');
             const dropdown = document.getElementById('languageDropdown');
+            const button = document.querySelector('.language-button');
             
-            // Don't close if clicking inside the language selector
-            if (selector && dropdown && !selector.contains(event.target)) {
+            // Don't close if clicking inside the language selector or on the button
+            if (selector && dropdown && !selector.contains(event.target) && event.target !== button && !button.contains(event.target)) {
+                // Add small delay to prevent immediate closing after opening
+                if (languageMenuJustOpened) {
+                    setTimeout(() => {
+                        languageMenuJustOpened = false;
+                    }, 100);
+                    return;
+                }
+                dropdown.classList.remove('show');
+            }
+        });
+        
+        // Also handle touch events for mobile
+        document.addEventListener('touchend', function(event) {
+            const selector = document.querySelector('.language-selector');
+            const dropdown = document.getElementById('languageDropdown');
+            const button = document.querySelector('.language-button');
+            
+            if (selector && dropdown && !selector.contains(event.target) && event.target !== button && !button.contains(event.target)) {
+                if (languageMenuJustOpened) {
+                    setTimeout(() => {
+                        languageMenuJustOpened = false;
+                    }, 100);
+                    return;
+                }
                 dropdown.classList.remove('show');
             }
         });
