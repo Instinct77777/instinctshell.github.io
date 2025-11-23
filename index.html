@@ -216,7 +216,7 @@
         }
 
         #about {
-            margin-top: 6rem;
+            margin-top: 10rem;
         }
 
         .hero {
@@ -826,6 +826,10 @@
                 opacity: 1 !important;
                 visibility: visible !important;
             }
+
+            #about {
+                margin-top: 12rem !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -931,6 +935,10 @@
                 color: var(--text-secondary) !important;
                 opacity: 1 !important;
                 visibility: visible !important;
+            }
+
+            #about {
+                margin-top: 12rem !important;
             }
         }
 
@@ -2213,15 +2221,12 @@
                 }
             });
 
-            // Add event listener for language button (better mobile support)
+            // Ensure language button works on mobile
             const langButton = document.querySelector('.language-button');
             if (langButton) {
-                // Keep onclick but also add touch support
-                langButton.addEventListener('touchend', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toggleLanguageMenu(e);
-                }, { passive: false });
+                // Make sure button is clickable
+                langButton.style.pointerEvents = 'auto';
+                langButton.style.zIndex = '1003';
             }
         });
 
@@ -2235,52 +2240,60 @@
                 e.preventDefault();
             }
             const dropdown = document.getElementById('languageDropdown');
-            const isShowing = dropdown.classList.contains('show');
-            dropdown.classList.toggle('show');
+            if (!dropdown) return;
             
-            // Set flag to prevent immediate closing
-            if (!isShowing) {
+            const isShowing = dropdown.classList.contains('show');
+            
+            // Close all other dropdowns first
+            document.querySelectorAll('.language-dropdown').forEach(d => {
+                if (d !== dropdown) d.classList.remove('show');
+            });
+            
+            // Toggle current dropdown
+            if (isShowing) {
+                dropdown.classList.remove('show');
+                languageMenuJustOpened = false;
+            } else {
+                dropdown.classList.add('show');
                 languageMenuJustOpened = true;
                 setTimeout(() => {
                     languageMenuJustOpened = false;
-                }, 200);
+                }, 500);
             }
         }
         
-        document.addEventListener('click', function(event) {
-            const selector = document.querySelector('.language-selector');
-            const dropdown = document.getElementById('languageDropdown');
-            const button = document.querySelector('.language-button');
-            
-            // Don't close if clicking inside the language selector or on the button
-            if (selector && dropdown && !selector.contains(event.target) && event.target !== button && !button.contains(event.target)) {
-                // Add small delay to prevent immediate closing after opening
-                if (languageMenuJustOpened) {
-                    setTimeout(() => {
-                        languageMenuJustOpened = false;
-                    }, 100);
-                    return;
+        // Close language menu when clicking outside (with delay)
+        setTimeout(() => {
+            document.addEventListener('click', function(event) {
+                const selector = document.querySelector('.language-selector');
+                const dropdown = document.getElementById('languageDropdown');
+                
+                if (!selector || !dropdown) return;
+                
+                // Don't close if clicking inside the language selector
+                if (!selector.contains(event.target)) {
+                    if (languageMenuJustOpened) {
+                        return;
+                    }
+                    dropdown.classList.remove('show');
                 }
-                dropdown.classList.remove('show');
-            }
-        });
-        
-        // Also handle touch events for mobile
-        document.addEventListener('touchend', function(event) {
-            const selector = document.querySelector('.language-selector');
-            const dropdown = document.getElementById('languageDropdown');
-            const button = document.querySelector('.language-button');
+            }, true); // Use capture phase
             
-            if (selector && dropdown && !selector.contains(event.target) && event.target !== button && !button.contains(event.target)) {
-                if (languageMenuJustOpened) {
-                    setTimeout(() => {
-                        languageMenuJustOpened = false;
-                    }, 100);
-                    return;
+            // Also handle touch events for mobile
+            document.addEventListener('touchend', function(event) {
+                const selector = document.querySelector('.language-selector');
+                const dropdown = document.getElementById('languageDropdown');
+                
+                if (!selector || !dropdown) return;
+                
+                if (!selector.contains(event.target)) {
+                    if (languageMenuJustOpened) {
+                        return;
+                    }
+                    dropdown.classList.remove('show');
                 }
-                dropdown.classList.remove('show');
-            }
-        });
+            }, true); // Use capture phase
+        }, 100);
 
         // Change language
         function changeLanguage(lang, save = true) {
