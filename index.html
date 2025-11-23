@@ -99,7 +99,11 @@
         }
 
         .mobile-only {
-            display: none;
+            display: none !important;
+        }
+
+        .nav-dropdown.mobile-only {
+            display: none !important;
         }
 
         .mobile-hide {
@@ -816,6 +820,10 @@
                 display: flex !important;
             }
 
+            .nav-dropdown.mobile-only {
+                display: flex !important;
+            }
+
             .mobile-hide {
                 display: none !important;
             }
@@ -961,6 +969,10 @@
             }
 
             .mobile-only {
+                display: flex !important;
+            }
+
+            .nav-dropdown.mobile-only {
                 display: flex !important;
             }
 
