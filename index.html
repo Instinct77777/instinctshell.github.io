@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InstinctShell - VPN Subscription Management</title>
+    <title>InstinctShell - VPN Server / Subscription Management App</title>
     <style>
         * {
             margin: 0;
@@ -1038,7 +1038,7 @@
     <nav>
         <div class="nav-container">
                 <div class="language-selector">
-                    <button class="language-button" type="button">
+                    <button class="language-button" type="button" onclick="window.toggleLanguageMenu(event)">
                         <span id="current-lang-flag">🇬🇧</span>
                         <span id="current-lang-code">EN</span>
                     </button>
@@ -1073,7 +1073,7 @@
         <!-- Hero Section -->
         <section id="home" class="hero">
             <h1>InstinctShell</h1>
-            <p>VPN Subscription Management Application</p>
+            <p>VPN Server / Subscription Management App</p>
             <a href="https://t.me/instinct_kotlin" target="_blank" rel="noopener noreferrer" class="version" id="telegram-hero-btn">✈️ Telegram</a>
             <a href="#" class="version" id="download-version-btn" onclick="event.preventDefault(); alert('Download link will be available soon!');">Download Version 1.9.7 | Android 7.0+ | API 24-35</a>
         </section>
@@ -1435,7 +1435,7 @@
                 },
                 hero: {
                     title: 'InstinctShell',
-                    subtitle: 'Приложение для управления VPN-подписками',
+                    subtitle: 'VPN Server / Subscription Management App',
                     version: 'Скачать Версия 1.9.7 | Android 7.0+ | API 24-35'
                 },
                 about: {
@@ -1685,7 +1685,7 @@
                 },
                 hero: {
                     title: 'InstinctShell',
-                    subtitle: 'VPN Subscription Management Application',
+                    subtitle: 'VPN Server / Subscription Management App',
                     version: 'Download Version 1.9.7 | Android 7.0+ | API 24-35'
                 },
                 about: {
@@ -1935,7 +1935,7 @@
                 },
                 hero: {
                     title: 'InstinctShell',
-                    subtitle: 'VPN订阅管理应用程序',
+                    subtitle: 'VPN Server / Subscription Management App',
                     version: '下载 版本 1.9.7 | Android 7.0+ | API 24-35'
                 },
                 about: {
@@ -2221,40 +2221,18 @@
                 }
             });
 
-            // Ensure language button works on mobile - direct approach
+            // Ensure language button is clickable
             const langButton = document.querySelector('.language-button');
             if (langButton) {
-                // Make sure button is clickable
                 langButton.style.pointerEvents = 'auto';
                 langButton.style.zIndex = '1003';
                 langButton.style.touchAction = 'manipulation';
-                langButton.style.webkitTapHighlightColor = 'transparent';
                 langButton.style.cursor = 'pointer';
-                langButton.style.userSelect = 'none';
-                
-                // Remove any existing onclick to avoid conflicts
-                langButton.removeAttribute('onclick');
-                
-                // Add click handler that works on both mobile and desktop
-                langButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('Language button clicked');
-                    window.toggleLanguageMenu(e);
-                }, false);
-                
-                // Also handle touch for better mobile support (but don't prevent click)
-                langButton.addEventListener('touchend', function(e) {
-                    // Don't prevent default to allow click to fire
-                    e.stopPropagation();
-                    console.log('Language button touched');
-                    // Click event will handle the toggle
-                }, { passive: true });
             }
         });
 
-        // Close language menu when clicking outside
-        window.window.languageMenuJustOpened = false;
+        // Initialize language menu flag
+        window.languageMenuJustOpened = false;
 
         // Toggle language menu - make it globally available
         window.toggleLanguageMenu = function(e) {
@@ -2265,90 +2243,46 @@
             
             const dropdown = document.getElementById('languageDropdown');
             if (!dropdown) {
-                console.error('Language dropdown not found');
                 return;
             }
             
             const isShowing = dropdown.classList.contains('show');
-            console.log('Toggle language menu, isShowing:', isShowing);
             
-            // Close all other dropdowns first
-            document.querySelectorAll('.language-dropdown').forEach(d => {
-                if (d !== dropdown) d.classList.remove('show');
-            });
-            
-            // Toggle current dropdown
+            // Toggle dropdown
             if (isShowing) {
                 dropdown.classList.remove('show');
                 window.languageMenuJustOpened = false;
-                console.log('Language menu closed');
             } else {
                 dropdown.classList.add('show');
                 window.languageMenuJustOpened = true;
-                console.log('Language menu opened');
-                // Force reflow to ensure display change
-                dropdown.offsetHeight;
                 setTimeout(() => {
                     window.languageMenuJustOpened = false;
-                }, 300);
+                }, 200);
             }
         };
         
-        // Close language menu when clicking outside (with delay)
-        setTimeout(() => {
-            document.addEventListener('click', function(event) {
-                const selector = document.querySelector('.language-selector');
-                const dropdown = document.getElementById('languageDropdown');
-                const button = document.querySelector('.language-button');
-                
-                if (!selector || !dropdown) return;
-                
-                // Don't close if clicking on the button or inside the language selector
-                const clickedButton = event.target.closest('.language-button');
-                if (clickedButton || selector.contains(event.target)) {
-                    return;
-                }
-                
-                // Don't close if menu was just opened
-                if (window.languageMenuJustOpened) {
-                    console.log('Menu just opened, not closing');
-                    return;
-                }
-                
-                // Only close if dropdown is actually showing
-                if (dropdown.classList.contains('show')) {
-                    dropdown.classList.remove('show');
-                    console.log('Language menu closed by click outside');
-                }
-            }, true); // Use capture phase to catch events early
+        // Close language menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const selector = document.querySelector('.language-selector');
+            const dropdown = document.getElementById('languageDropdown');
             
-            // Also handle touch events for mobile
-            document.addEventListener('touchend', function(event) {
-                const selector = document.querySelector('.language-selector');
-                const dropdown = document.getElementById('languageDropdown');
-                const button = document.querySelector('.language-button');
-                
-                if (!selector || !dropdown) return;
-                
-                // Don't close if clicking on the button or inside the language selector
-                const clickedButton = event.target.closest('.language-button');
-                if (clickedButton || selector.contains(event.target)) {
-                    return;
-                }
-                
-                // Don't close if menu was just opened
-                if (window.languageMenuJustOpened) {
-                    console.log('Menu just opened, not closing (touch)');
-                    return;
-                }
-                
-                // Only close if dropdown is actually showing
-                if (dropdown.classList.contains('show')) {
-                    dropdown.classList.remove('show');
-                    console.log('Language menu closed by touch outside');
-                }
-            }, true); // Use capture phase
-        }, 100);
+            if (!selector || !dropdown) return;
+            
+            // Don't close if clicking inside the language selector
+            if (selector.contains(event.target)) {
+                return;
+            }
+            
+            // Don't close if menu was just opened
+            if (window.languageMenuJustOpened) {
+                return;
+            }
+            
+            // Close if dropdown is showing
+            if (dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            }
+        });
 
         // Change language
         function changeLanguage(lang, save = true) {
@@ -2669,16 +2603,11 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const nav = document.querySelector('nav');
-                    const navHeight = nav ? nav.offsetHeight : 80;
-                    // Use minimal offset - just enough to show content below nav
-                    // For mobile, nav is smaller, so use adaptive offset
-                    const isMobile = window.innerWidth <= 768;
-                    const offset = isMobile ? 10 : 20; // Very small offset
-                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    // No offset - scroll directly to target
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
                     
                     window.scrollTo({
-                        top: Math.max(0, targetPosition), // Ensure we don't scroll to negative position
+                        top: Math.max(0, targetPosition),
                         behavior: 'smooth'
                     });
                 }
