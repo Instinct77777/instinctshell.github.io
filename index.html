@@ -4,6 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InstinctShell - VPN Server / Subscription Management App</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="InstinctShell - Modern Android VPN app for managing VPN subscriptions with support for multiple protocols (VLESS, VMESS, Trojan, Shadowsocks) and advanced security features. Free and open-source.">
+    <meta name="keywords" content="VPN, Android, InstinctShell, VLESS, VMESS, Trojan, Shadowsocks, VPN client, subscription manager, privacy, security">
+    <meta name="author" content="InstinctShell Team">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://instinctshell.github.io/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://instinctshell.github.io/">
+    <meta property="og:title" content="InstinctShell - VPN Server / Subscription Management App">
+    <meta property="og:description" content="Modern Android VPN app for managing VPN subscriptions with support for multiple protocols and advanced security features.">
+    <meta property="og:image" content="https://instinctshell.github.io/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://instinctshell.github.io/">
+    <meta property="twitter:title" content="InstinctShell - VPN Server / Subscription Management App">
+    <meta property="twitter:description" content="Modern Android VPN app for managing VPN subscriptions with support for multiple protocols and advanced security features.">
+    <meta property="twitter:image" content="https://instinctshell.github.io/og-image.jpg">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#6200EE">
+    <meta name="msapplication-TileColor" content="#6200EE">
     <style>
         * {
             margin: 0;
@@ -33,6 +58,24 @@
             background: url('./4k back web.jpg') center center / cover no-repeat fixed;
             min-height: 100vh;
             position: relative;
+            scroll-behavior: smooth;
+        }
+        
+        /* Skip to main content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-decoration: none;
+            z-index: 10000;
+            border-radius: 0 0 8px 0;
+        }
+        
+        .skip-link:focus {
+            top: 0;
         }
 
         body::before {
@@ -1424,53 +1467,57 @@
     </style>
 </head>
 <body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#home" class="skip-link">Skip to main content</a>
+    
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
                 <div class="language-selector">
-                    <button class="language-button" type="button" onclick="window.toggleLanguageMenu(event)">
-                        <span id="current-lang-flag">🇬🇧</span>
+                    <button class="language-button" type="button" onclick="window.toggleLanguageMenu(event)" 
+                            aria-label="Select language" aria-haspopup="true" aria-expanded="false" id="language-button">
+                        <span id="current-lang-flag" aria-hidden="true">🇬🇧</span>
                         <span id="current-lang-code">EN</span>
                     </button>
-                    <div class="language-dropdown" id="languageDropdown">
-                        <div class="language-option" onclick="changeLanguage('ru')">
-                            <span>🇷🇺</span>
+                    <div class="language-dropdown" id="languageDropdown" role="menu" aria-labelledby="language-button">
+                        <div class="language-option" onclick="changeLanguage('ru')" role="menuitem" tabindex="0" aria-label="Switch to Russian">
+                            <span aria-hidden="true">🇷🇺</span>
                             <span>Русский</span>
                         </div>
-                        <div class="language-option active" onclick="changeLanguage('en')">
-                            <span>🇬🇧</span>
+                        <div class="language-option active" onclick="changeLanguage('en')" role="menuitem" tabindex="0" aria-label="Switch to English" aria-current="true">
+                            <span aria-hidden="true">🇬🇧</span>
                             <span>English</span>
                         </div>
-                        <div class="language-option" onclick="changeLanguage('zh')">
-                            <span>🇨🇳</span>
+                        <div class="language-option" onclick="changeLanguage('zh')" role="menuitem" tabindex="0" aria-label="Switch to Chinese">
+                            <span aria-hidden="true">🇨🇳</span>
                             <span>中文</span>
                         </div>
-                        <div class="language-option" onclick="changeLanguage('be')">
-                            <span>🇧🇾</span>
+                        <div class="language-option" onclick="changeLanguage('be')" role="menuitem" tabindex="0" aria-label="Switch to Belarusian">
+                            <span aria-hidden="true">🇧🇾</span>
                             <span>Беларуская</span>
                         </div>
-                        <div class="language-option" onclick="changeLanguage('uk')">
-                            <span>🇺🇦</span>
+                        <div class="language-option" onclick="changeLanguage('uk')" role="menuitem" tabindex="0" aria-label="Switch to Ukrainian">
+                            <span aria-hidden="true">🇺🇦</span>
                             <span>Українська</span>
                         </div>
-                        <div class="language-option" onclick="changeLanguage('ja')">
-                            <span>🇯🇵</span>
+                        <div class="language-option" onclick="changeLanguage('ja')" role="menuitem" tabindex="0" aria-label="Switch to Japanese">
+                            <span aria-hidden="true">🇯🇵</span>
                             <span>日本語</span>
                         </div>
-                        <div class="language-option" onclick="changeLanguage('de')">
-                            <span>🇩🇪</span>
+                        <div class="language-option" onclick="changeLanguage('de')" role="menuitem" tabindex="0" aria-label="Switch to German">
+                            <span aria-hidden="true">🇩🇪</span>
                             <span>Deutsch</span>
                         </div>
-                        <div class="language-option" onclick="changeLanguage('fr')">
-                            <span>🇫🇷</span>
+                        <div class="language-option" onclick="changeLanguage('fr')" role="menuitem" tabindex="0" aria-label="Switch to French">
+                            <span aria-hidden="true">🇫🇷</span>
                             <span>Français</span>
                         </div>
-                        <div class="language-option" onclick="changeLanguage('he')">
-                            <span>🇮🇱</span>
+                        <div class="language-option" onclick="changeLanguage('he')" role="menuitem" tabindex="0" aria-label="Switch to Hebrew">
+                            <span aria-hidden="true">🇮🇱</span>
                             <span>עברית</span>
                         </div>
-                        <div class="language-option" onclick="changeLanguage('ar')">
-                            <span>🇸🇦</span>
+                        <div class="language-option" onclick="changeLanguage('ar')" role="menuitem" tabindex="0" aria-label="Switch to Arabic">
+                            <span aria-hidden="true">🇸🇦</span>
                             <span>العربية</span>
                         </div>
                     </div>
@@ -1838,7 +1885,7 @@
     </footer>
 
     <!-- Scroll to top button -->
-    <button class="scroll-top" onclick="scrollToTop()">↑</button>
+    <button class="scroll-top" onclick="scrollToTop()" aria-label="Scroll to top">↑</button>
 
     <script>
         // Language translations
@@ -4014,7 +4061,8 @@
                 event.stopPropagation();
             }
             const dropdown = document.getElementById('languageDropdown');
-            if (!dropdown) {
+            const button = document.getElementById('language-button');
+            if (!dropdown || !button) {
                 return;
             }
             
@@ -4023,9 +4071,11 @@
             // Toggle dropdown
             if (isShowing) {
                 dropdown.classList.remove('show');
+                button.setAttribute('aria-expanded', 'false');
                 window.languageMenuJustOpened = false;
             } else {
                 dropdown.classList.add('show');
+                button.setAttribute('aria-expanded', 'true');
                 window.languageMenuJustOpened = true;
                 setTimeout(() => {
                     window.languageMenuJustOpened = false;
@@ -4053,6 +4103,8 @@
             // Close if dropdown is showing
             if (dropdown.classList.contains('show')) {
                 dropdown.classList.remove('show');
+                const button = document.getElementById('language-button');
+                if (button) button.setAttribute('aria-expanded', 'false');
             }
         }
         document.addEventListener('click', handleLanguageMenuClose, true);
@@ -4469,15 +4521,22 @@
             });
         });
 
-        // Scroll to top button
-        window.addEventListener('scroll', function() {
-            const scrollTop = document.querySelector('.scroll-top');
-            if (window.pageYOffset > 300) {
-                scrollTop.classList.add('show');
-            } else {
-                scrollTop.classList.remove('show');
+        // Scroll to top button with debounce for performance
+        let scrollTimeout;
+        function handleScroll() {
+            if (scrollTimeout) {
+                cancelAnimationFrame(scrollTimeout);
             }
-        });
+            scrollTimeout = requestAnimationFrame(() => {
+                const scrollTop = document.querySelector('.scroll-top');
+                if (window.pageYOffset > 300) {
+                    scrollTop.classList.add('show');
+                } else {
+                    scrollTop.classList.remove('show');
+                }
+            });
+        }
+        window.addEventListener('scroll', handleScroll, { passive: true });
 
         function scrollToTop() {
             window.scrollTo({
